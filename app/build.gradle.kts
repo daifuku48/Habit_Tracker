@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -74,6 +75,12 @@ dependencies {
 
     //Glide
     implementation("com.github.bumptech.glide:compose:1.0.0-alpha.1")
+
+    //Room
+    implementation("androidx.room:room-runtime:2.5.2")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
+    // To use Kotlin annotation processing tool (kapt)
+    ksp("androidx.room:room-compiler:2.5.2")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
