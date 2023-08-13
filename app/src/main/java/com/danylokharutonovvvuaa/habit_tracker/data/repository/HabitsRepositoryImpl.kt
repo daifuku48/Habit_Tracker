@@ -13,8 +13,8 @@ class HabitsRepositoryImpl @Inject constructor(
     private val categoryMapper: CategoryMapper,
     private val habitsMapper: HabitsMapper
 ) : HabitsRepository {
-    override fun getAllHabitsFromCategory(id: Long): List<HabitDomain> {
-        val list = habitsDao.getHabitsByCategories(id)
+    override suspend fun getAllHabitsFromCategory(id: Long): List<HabitDomain> {
+        val list = habitsDao.getHabitsByCategory(id)
         val domainList = mutableListOf<HabitDomain>()
         for (item in list){
             domainList.add(habitsMapper.entityToDomain(item))
@@ -22,7 +22,7 @@ class HabitsRepositoryImpl @Inject constructor(
         return domainList
     }
 
-    override fun getAllCategories(): List<CategoryDomain> {
+    override suspend fun getAllCategories(): List<CategoryDomain> {
         val list = habitsDao.getAllCategories()
         val domainList = mutableListOf<CategoryDomain>()
         for (item in list){
@@ -31,27 +31,27 @@ class HabitsRepositoryImpl @Inject constructor(
         return domainList
     }
 
-    override fun addCategory(categoryDomain: CategoryDomain) {
+    override suspend fun addCategory(categoryDomain: CategoryDomain) {
         habitsDao.insertCategory(categoryMapper.domainToEntity(categoryDomain))
     }
 
-    override fun addHabit(habitDomain: HabitDomain) {
+    override suspend fun addHabit(habitDomain: HabitDomain) {
         habitsDao.insertHabit(habitsMapper.domainToEntity(habitDomain))
     }
 
-    override fun deleteCategory(categoryDomain: CategoryDomain) {
+    override suspend fun deleteCategory(categoryDomain: CategoryDomain) {
         habitsDao.deleteCategory(categoryMapper.domainToEntity(categoryDomain))
     }
 
-    override fun deleteHabit(habitDomain: HabitDomain) {
+    override suspend fun deleteHabit(habitDomain: HabitDomain) {
         habitsDao.deleteHabit(habitsMapper.domainToEntity(habitDomain))
     }
 
-    override fun updateCategory(categoryDomain: CategoryDomain) {
+    override suspend fun updateCategory(categoryDomain: CategoryDomain) {
         habitsDao.updateCategories(categoryMapper.domainToEntity(categoryDomain))
     }
 
-    override fun updateHabit(habitDomain: HabitDomain) {
+    override suspend fun updateHabit(habitDomain: HabitDomain) {
         habitsDao.updateHabit(habitsMapper.domainToEntity(habitDomain))
     }
 }

@@ -11,7 +11,6 @@ class CategoryMapper : Mapper<CategoryEntity, CategoryDomain> {
             category = entityModel.category,
             description = entityModel.description,
             countOfActivities = entityModel.countOfActivities,
-            habitList = entityModel.habitList
         )
     }
 
@@ -21,7 +20,6 @@ class CategoryMapper : Mapper<CategoryEntity, CategoryDomain> {
             category = domainModel.category,
             description = domainModel.description,
             countOfActivities = domainModel.countOfActivities,
-            habitList = domainModel.habitList
         )
     }
 }

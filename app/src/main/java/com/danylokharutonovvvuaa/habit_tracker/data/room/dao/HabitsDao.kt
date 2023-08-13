@@ -11,26 +11,26 @@ import com.danylokharutonovvvuaa.habit_tracker.data.room.entities.HabitEntity
 @Dao
 interface HabitsDao {
     @Insert
-    fun insertCategory(categoriesEntity: CategoryEntity)
+    suspend fun insertCategory(categoriesEntity: CategoryEntity)
 
     @Update
-    fun updateCategories(categoriesEntity: CategoryEntity)
+    suspend fun updateCategories(categoriesEntity: CategoryEntity)
 
     @Insert
-    fun insertHabit(habitEntity: HabitEntity)
+    suspend fun insertHabit(habitEntity: HabitEntity)
 
     @Update
-    fun updateHabit(habitEntity: HabitEntity)
+    suspend fun updateHabit(habitEntity: HabitEntity)
 
     @Query("SELECT * FROM CATEGORIES_TABLE")
-    fun getAllCategories() : List<CategoryEntity>
+    suspend fun getAllCategories() : List<CategoryEntity>
 
-    @Query("SELECT * FROM CATEGORIES_TABLE WHERE id == :id")
-    fun getHabitsByCategories(id: Long) : List<HabitEntity>
-
-    @Delete
-    fun deleteHabit(habitEntity: HabitEntity)
+    @Query("SELECT * FROM habits_table WHERE categoryId = :categoryId")
+    suspend fun getHabitsByCategory(categoryId: Long): List<HabitEntity>
 
     @Delete
-    fun deleteCategory(categoryEntity: CategoryEntity)
+    suspend fun deleteHabit(habitEntity: HabitEntity)
+
+    @Delete
+    suspend fun deleteCategory(categoryEntity: CategoryEntity)
 }

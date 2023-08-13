@@ -4,18 +4,18 @@ import com.danylokharutonovvvuaa.habit_tracker.domain.model.CategoryDomain
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.HabitDomain
 
 interface HabitsRepository {
-    fun getAllHabitsFromCategory(id: Long) : List<HabitDomain>
-    fun getAllCategories() : List<CategoryDomain>
+    suspend fun getAllHabitsFromCategory(id: Long) : List<HabitDomain>
+    suspend fun getAllCategories() : List<CategoryDomain>
 
-    fun addCategory(categoryDomain: CategoryDomain)
+    suspend fun addCategory(categoryDomain: CategoryDomain)
 
-    fun addHabit(habitDomain: HabitDomain)
+    suspend fun addHabit(habitDomain: HabitDomain)
 
-    fun deleteCategory(categoryDomain: CategoryDomain)
+    suspend fun deleteCategory(categoryDomain: CategoryDomain)
 
-    fun deleteHabit(habitDomain: HabitDomain)
+    suspend fun deleteHabit(habitDomain: HabitDomain)
 
-    fun updateCategory(categoryDomain: CategoryDomain)
+    suspend fun updateCategory(categoryDomain: CategoryDomain)
 
-    fun updateHabit(habitDomain: HabitDomain)
+    suspend fun updateHabit(habitDomain: HabitDomain)
 }

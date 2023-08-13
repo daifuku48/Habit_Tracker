@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetAllHabitsUseCase @Inject constructor(
     private val habitsRepository: HabitsRepository
 ){
-    fun execute(id: Long): List<HabitDomain>{
+    suspend fun execute(id: Long): List<HabitDomain>{
         return habitsRepository.getAllHabitsFromCategory(id = id)
     }
 }

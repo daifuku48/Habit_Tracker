@@ -81,6 +81,7 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.5.2")
     // To use Kotlin annotation processing tool (kapt)
     ksp("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-ktx:2.5.2")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")

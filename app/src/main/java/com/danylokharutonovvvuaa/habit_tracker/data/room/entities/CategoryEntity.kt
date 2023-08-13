@@ -12,6 +12,5 @@ data class CategoryEntity(
     var id: Long = 0,
     var category: String,
     var description: String,
-    var countOfActivities: Int,
-    @Embedded var habitList: List<HabitEntity> = emptyList()
+    var countOfActivities: Int
 )
