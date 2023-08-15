@@ -25,11 +25,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
 
 
 @Composable
-fun HabitCard(habit: String){
+fun HabitCard(habit: String, vm: HomeScreenViewModel){
 
     val crossedOut = remember { mutableStateOf(false) }
 
@@ -72,11 +74,4 @@ fun HabitCard(habit: String){
             style = textStyle
         )
     }
-}
-
-
-@Preview
-@Composable
-fun PreviewHabitCard(){
-    HabitCard(habit = "Go to bed")
 }

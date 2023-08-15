@@ -18,7 +18,8 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScre
 
 
 @Composable
-fun HabitsList(//vm: HomeScreenViewModel
+fun HabitsList(
+    vm: HomeScreenViewModel
 ){
 
     LazyColumn(
@@ -37,17 +38,9 @@ fun HabitsList(//vm: HomeScreenViewModel
                 fontFamily = FontFamily(Font(R.font.notosans_bold))
             )
         }
-        val count = 3
-        val list = listOf("негр", "get to bed", "kek")
-        items(count){index ->
-            HabitCard(list[index])
-        }
+
+        //items(count){index ->
+          //  HabitCard(list[index], vm)
+        //}
     }
-}
-
-
-@Preview
-@Composable
-fun Prev(){
-    HabitsList()
 }

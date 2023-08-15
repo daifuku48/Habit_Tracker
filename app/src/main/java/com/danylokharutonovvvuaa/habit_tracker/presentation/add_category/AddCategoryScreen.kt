@@ -20,16 +20,25 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
+import com.danylokharutonovvvuaa.habit_tracker.presentation.add_category.components.ColumnText
+import com.danylokharutonovvvuaa.habit_tracker.presentation.add_category.components.SpaceBetween
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple40
 
 
@@ -41,7 +50,8 @@ fun AddCategoryScreen(navController: NavController, vm: AddCategoryViewModel){
             .fillMaxSize()
             .background(color = Color.White),
         contentAlignment = Alignment.Center
-    ) {
+    )
+    {
         Column(
             modifier = Modifier
                 .width(300.dp) // Adjust the width as needed
@@ -63,15 +73,18 @@ fun AddCategoryScreen(navController: NavController, vm: AddCategoryViewModel){
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            SpaceBetween()
 
-            Text("New Category")
+            ColumnText("New Category")
 
-            Spacer(modifier = Modifier.height(20.dp))
+            SpaceBetween()
 
+            var categoryText by remember { mutableStateOf(TextFieldValue("")) }
             TextField(
-                value = "",
-                onValueChange = {},
+                value = categoryText,
+                onValueChange = { newText ->
+                    categoryText =  newText
+                },
                 modifier = Modifier
                     .border(
                         BorderStroke(width = 2.dp, color = Purple40),
@@ -88,17 +101,30 @@ fun AddCategoryScreen(navController: NavController, vm: AddCategoryViewModel){
                     fontSize = 20.sp,
                     color = Color.Black
                 ),
+                trailingIcon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.baseline_clear_24),
+                        contentDescription = "clearIconCategory",
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                categoryText = TextFieldValue("")
+                            }
+                        )
+                    )
+                }
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            SpaceBetween()
 
-            Text("Description")
+            ColumnText("Description")
 
-            Spacer(modifier = Modifier.height(20.dp))
-
+            SpaceBetween()
+            var categoryDescription by remember { mutableStateOf(TextFieldValue("")) }
             TextField(
-                value = "",
-                onValueChange = {},
+                value = categoryDescription,
+                onValueChange = { newText ->
+                    categoryDescription = newText
+                },
                 modifier = Modifier
                     .border(
                         BorderStroke(width = 2.dp, color = Purple40),
@@ -115,9 +141,20 @@ fun AddCategoryScreen(navController: NavController, vm: AddCategoryViewModel){
                     fontSize = 20.sp,
                     color = Color.Black
                 ),
+                trailingIcon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.baseline_clear_24),
+                        contentDescription = "clearIconCategory",
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                categoryDescription = TextFieldValue("")
+                            }
+                        )
+                    )
+                }
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            SpaceBetween()
 
             Button(
                 onClick = { /*TODO*/ },
@@ -138,7 +175,8 @@ fun pre(){
             .fillMaxSize()
             .background(color = Color.White),
         contentAlignment = Alignment.Center
-    ) {
+    )
+    {
         Column(
             modifier = Modifier
                 .width(300.dp) // Adjust the width as needed
@@ -160,15 +198,18 @@ fun pre(){
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            SpaceBetween()
 
-            Text("New Category")
+            ColumnText("New Category")
 
-            Spacer(modifier = Modifier.height(20.dp))
+            SpaceBetween()
 
+            var categoryText by remember { mutableStateOf(TextFieldValue("")) }
             TextField(
-                value = "",
-                onValueChange = {},
+                value = categoryText,
+                onValueChange = { newText ->
+                    categoryText =  newText
+                },
                 modifier = Modifier
                     .border(
                         BorderStroke(width = 2.dp, color = Purple40),
@@ -185,17 +226,30 @@ fun pre(){
                     fontSize = 20.sp,
                     color = Color.Black
                 ),
+                trailingIcon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.baseline_clear_24),
+                        contentDescription = "clearIconCategory",
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                categoryText = TextFieldValue("")
+                            }
+                        )
+                    )
+                }
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            SpaceBetween()
 
-            Text("Description")
+            ColumnText("Description")
 
-            Spacer(modifier = Modifier.height(20.dp))
-
+            SpaceBetween()
+            var categoryDescription by remember { mutableStateOf(TextFieldValue("")) }
             TextField(
-                value = "",
-                onValueChange = {},
+                value = categoryDescription,
+                onValueChange = { newText ->
+                    categoryDescription = newText
+                },
                 modifier = Modifier
                     .border(
                         BorderStroke(width = 2.dp, color = Purple40),
@@ -212,9 +266,20 @@ fun pre(){
                     fontSize = 20.sp,
                     color = Color.Black
                 ),
+                trailingIcon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.baseline_clear_24),
+                        contentDescription = "clearIconCategory",
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                categoryDescription = TextFieldValue("")
+                            }
+                        )
+                    )
+                }
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            SpaceBetween()
 
             Button(
                 onClick = { /*TODO*/ },
@@ -225,4 +290,5 @@ fun pre(){
         }
     }
 }
+
 

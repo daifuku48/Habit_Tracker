@@ -16,17 +16,17 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesItemsList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesText
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.HabitsList
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.ItemsList
 import kotlinx.coroutines.launch
 
 @ExperimentalMaterial3Api
 @Composable
-fun HomeScreen(navController: NavController, vm: HomeScreenViewModel
+fun HomeScreen(
+    navController: NavController, vm: HomeScreenViewModel
 ) {
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
@@ -90,8 +90,8 @@ fun HomeScreen(navController: NavController, vm: HomeScreenViewModel
                     .padding(paddingValues)
             ) {
                 CategoriesText()
-                ItemsList()
-                HabitsList()
+                CategoriesItemsList(vm = vm, navController = navController)
+                HabitsList(vm = vm)
             }
         }
     )

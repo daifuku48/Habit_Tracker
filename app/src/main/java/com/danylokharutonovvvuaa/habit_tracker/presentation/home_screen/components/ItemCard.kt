@@ -15,12 +15,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.CategoriesItem
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 
 @Composable
-fun ItemCard(item: CategoriesItem) {
+fun ItemCard(item: CategoriesItem, navController: NavController, vm: HomeScreenViewModel) {
     Box(
         modifier = Modifier
             .padding(8.dp)
