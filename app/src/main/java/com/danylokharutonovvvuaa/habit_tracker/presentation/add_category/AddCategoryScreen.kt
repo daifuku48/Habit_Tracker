@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.presentation.add_habit
+package com.danylokharutonovvvuaa.habit_tracker.presentation.add_category
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -32,9 +32,10 @@ import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple40
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddHabitScreen(navController: NavController, addHabitScreenViewModel: AddHabitScreenViewModel) {
+fun AddCategoryScreen(navController: NavController, vm: AddCategoryViewModel){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -64,7 +65,34 @@ fun AddHabitScreen(navController: NavController, addHabitScreenViewModel: AddHab
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            Text("New Habit")
+            Text("New Category")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            TextField(
+                value = "",
+                onValueChange = {},
+                modifier = Modifier
+                    .border(
+                        BorderStroke(width = 2.dp, color = Purple40),
+                        shape = RoundedCornerShape(50)
+                    )
+                    .background(Color.Transparent)
+                    .fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
+                ),
+                textStyle = TextStyle(
+                    fontSize = 20.sp,
+                    color = Color.Black
+                ),
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Text("Description")
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -134,7 +162,34 @@ fun pre(){
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            Text("New Habit")
+            Text("New Category")
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            TextField(
+                value = "",
+                onValueChange = {},
+                modifier = Modifier
+                    .border(
+                        BorderStroke(width = 2.dp, color = Purple40),
+                        shape = RoundedCornerShape(50)
+                    )
+                    .background(Color.Transparent)
+                    .fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
+                ),
+                textStyle = TextStyle(
+                    fontSize = 20.sp,
+                    color = Color.Black
+                ),
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Text("Description")
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -170,3 +225,4 @@ fun pre(){
         }
     }
 }
+

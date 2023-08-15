@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesText
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.HabitsList
@@ -25,12 +26,9 @@ import kotlinx.coroutines.launch
 
 @ExperimentalMaterial3Api
 @Composable
-fun HomeScreen(
-//navController: NavController,
-// vm: HomeScreenViewModel
+fun HomeScreen(navController: NavController, vm: HomeScreenViewModel
 ) {
     val coroutineScope = rememberCoroutineScope()
-    //layout
     Scaffold(
         topBar = {
             TopAppBar(
@@ -45,8 +43,10 @@ fun HomeScreen(
 
                         }
                     }) {
-                        Icon(painter = painterResource(
-                            id = R.drawable.baseline_dehaze_24),
+                        Icon(
+                            painter = painterResource(
+                                id = R.drawable.baseline_dehaze_24
+                            ),
                             contentDescription = null
                         )
                     }
@@ -66,36 +66,33 @@ fun HomeScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                coroutineScope.launch {
+            FloatingActionButton(
+                onClick = {
+                    coroutineScope.launch {
 
-                }
-            },
+                    }
+                },
 
                 ) {
-                Icon(painter = painterResource(
-                    id = R.drawable.baseline_add_24),
+                Icon(
+                    painter = painterResource(
+                        id = R.drawable.baseline_add_24
+                    ),
                     contentDescription = null
                 )
             }
         },
         floatingActionButtonPosition = FabPosition.End,
         content = { paddingValues ->
-            Column(modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
                 CategoriesText()
                 ItemsList()
                 HabitsList()
             }
         }
     )
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Composable
-fun Preview() {
-    HomeScreen()
 }
