@@ -31,6 +31,15 @@ class HabitsRepositoryImpl @Inject constructor(
         return domainList
     }
 
+    override suspend fun getAllHabits(): List<HabitDomain> {
+        val list = habitsDao.getAllHabits()
+        val domainList = mutableListOf<HabitDomain>()
+        for (item in list){
+            domainList.add(habitsMapper.entityToDomain(item))
+        }
+        return domainList
+    }
+
     override suspend fun addCategory(categoryDomain: CategoryDomain) {
         habitsDao.insertCategory(categoryMapper.domainToEntity(categoryDomain))
     }

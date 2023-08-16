@@ -28,6 +28,9 @@ interface HabitsDao {
     @Query("SELECT * FROM habits_table WHERE categoryId = :categoryId")
     suspend fun getHabitsByCategory(categoryId: Long): List<HabitEntity>
 
+    @Query("SELECT * FROM habits_table")
+    suspend fun getAllHabits(): List<HabitEntity>
+
     @Delete
     suspend fun deleteHabit(habitEntity: HabitEntity)
 

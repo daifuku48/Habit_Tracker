@@ -19,14 +19,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesItemsList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesText
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.HabitText
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.HabitsList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.ShimmerCategoryItemList
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.ShimmerHabitList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -37,13 +44,19 @@ fun HomeScreen(
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    var isLoading by remember {
+    var isLoadingCategories by remember {
+        mutableStateOf(true)
+    }
+
+    var isLoadingHabits by remember {
         mutableStateOf(true)
     }
 
     LaunchedEffect(key1 = true){
         delay(2000L)
-        isLoading = false
+        isLoadingCategories = false
+        delay(1000L)
+        isLoadingHabits = false
     }
 
     Scaffold(
@@ -82,24 +95,6 @@ fun HomeScreen(
                 }
             )
         },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    coroutineScope.launch {
-
-                    }
-                },
-
-                ) {
-                Icon(
-                    painter = painterResource(
-                        id = R.drawable.baseline_add_24
-                    ),
-                    contentDescription = null
-                )
-            }
-        },
-        floatingActionButtonPosition = FabPosition.End,
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -107,11 +102,16 @@ fun HomeScreen(
                     .padding(paddingValues)
             ) {
                 CategoriesText()
-                ShimmerCategoryItemList(isLoading = isLoading,
+                ShimmerCategoryItemList(isLoading = isLoadingCategories,
                     contentAfterLoading = {
                         CategoriesItemsList(vm = vm, navController = navController)
                     })
-                HabitsList(vm = vm)
+                HabitText()
+                ShimmerHabitList(isLoading = isLoadingHabits,
+                    contentAfterLoading = {
+                        HabitsList(vm = vm)
+                    }
+                )
             }
         }
     )

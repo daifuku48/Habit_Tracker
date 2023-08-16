@@ -13,7 +13,6 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScre
 fun CategoriesItemsList(
     navController: NavController, vm: HomeScreenViewModel
 ){
-    val categories = vm.categories.value
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(
@@ -26,9 +25,11 @@ fun CategoriesItemsList(
                 vm = vm
             )
         }
-        //items{index->
-            //ItemCard()
-        //}
+
+        items(vm.categories.value.size){index ->
+            ItemCard(vm.categories.value[index], navController, vm)
+        }
+
         item {
             ItemCardForAddCategory(
                 navController = navController,

@@ -1,6 +1,7 @@
 package com.danylokharutonovvvuaa.habit_tracker.di
 
 import com.danylokharutonovvvuaa.habit_tracker.domain.repository.HabitsRepository
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllCategoriesUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllHabitsUseCase
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,12 @@ object DomainModule {
 
     @Provides
     fun provideGetAllHabitsUseCase(repository: HabitsRepository): GetAllHabitsUseCase {
-        return GetAllHabitsUseCase(habitsRepository = repository)
+        return GetAllHabitsUseCase(repository = repository)
+    }
+
+
+    fun provideGetAllCategoriesUseCase(repository: HabitsRepository) : GetAllCategoriesUseCase {
+        return GetAllCategoriesUseCase(repository = repository)
     }
 
 }

@@ -39,7 +39,9 @@ fun ItemCardForAddCategory(
             .background(
                 color = androidx.compose.ui.graphics.Color.White,
                 shape = RoundedCornerShape(15.dp)
-            ).clickable(onClick = {})
+            ).clickable(onClick = {
+                navController.navigate("add_category")
+            })
     ){
         Image(
             painter = painterResource(id = R.drawable.baseline_add_category),
