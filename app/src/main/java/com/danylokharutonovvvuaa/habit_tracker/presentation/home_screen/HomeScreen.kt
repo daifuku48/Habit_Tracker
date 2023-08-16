@@ -12,7 +12,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,6 +26,8 @@ import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesItemsList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesText
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.HabitsList
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.ShimmerCategoryItemList
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @ExperimentalMaterial3Api
@@ -29,6 +36,16 @@ fun HomeScreen(
     navController: NavController, vm: HomeScreenViewModel
 ) {
     val coroutineScope = rememberCoroutineScope()
+
+    var isLoading by remember {
+        mutableStateOf(true)
+    }
+
+    LaunchedEffect(key1 = true){
+        delay(2000L)
+        isLoading = false
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -90,9 +107,15 @@ fun HomeScreen(
                     .padding(paddingValues)
             ) {
                 CategoriesText()
-                CategoriesItemsList(vm = vm, navController = navController)
+                ShimmerCategoryItemList(isLoading = isLoading,
+                    contentAfterLoading = {
+                        CategoriesItemsList(vm = vm, navController = navController)
+                    })
                 HabitsList(vm = vm)
             }
         }
     )
 }
+
+
+

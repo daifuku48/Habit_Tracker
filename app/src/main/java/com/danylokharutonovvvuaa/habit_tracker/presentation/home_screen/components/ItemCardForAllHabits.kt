@@ -3,6 +3,7 @@ package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.compone
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -38,7 +39,7 @@ fun ItemCardForAllHabits(
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(15.dp)
-            )
+            ).clickable(onClick = {})
     ) {
         Text(
             text = "All",

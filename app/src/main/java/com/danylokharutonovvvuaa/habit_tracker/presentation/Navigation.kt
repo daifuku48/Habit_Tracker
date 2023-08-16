@@ -1,5 +1,6 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -13,6 +14,7 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.Splash
 import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.SplashScreen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.SplashScreenViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
@@ -29,6 +31,7 @@ fun Navigation() {
                 navController.getBackStackEntry(Screen.HomeScreen.route)
             }
             val homeVM = hiltViewModel<HomeScreenViewModel>(entry)
+            HomeScreen(navController = navController, vm = homeVM)
         }
         composable(route = Screen.AddHabit.route){
             val entry =  remember(it){

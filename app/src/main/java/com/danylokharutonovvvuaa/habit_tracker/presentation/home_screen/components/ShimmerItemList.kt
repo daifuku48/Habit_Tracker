@@ -5,6 +5,10 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,14 +21,26 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun ShimmerItemList(
+fun ShimmerCategoryItemList(
     isLoading: Boolean,
     contentAfterLoading: @Composable () -> Unit,
     modifier: Modifier = Modifier
 ) {
-
+    if (isLoading){
+        Column(modifier = modifier){
+            Box(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(120.dp)
+                    .shimmerEffect()
+            )
+        }
+    } else {
+        contentAfterLoading()
+    }
 }
 
 fun Modifier.shimmerEffect(): Modifier = composed {
@@ -42,9 +58,9 @@ fun Modifier.shimmerEffect(): Modifier = composed {
     background(
         brush = Brush.verticalGradient(
             colors = listOf(
-                Color(0xFF3F3F3),
-                Color(0xFB9B9B9),
-                Color(0xF7A7A7A)
+                Color(0xF3F3F3F),
+                Color(0xF8B8B8B),
+                Color(0xFBBBBBB)
             ),
             startY = startOffSetX,
             endY = startOffSetX + size.width.toFloat()

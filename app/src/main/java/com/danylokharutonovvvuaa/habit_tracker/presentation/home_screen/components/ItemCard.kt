@@ -1,6 +1,7 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -30,7 +31,7 @@ fun ItemCard(item: CategoriesItem, navController: NavController, vm: HomeScreenV
             .background(
                 color = Purple80,
                 shape = RoundedCornerShape(15.dp)
-            ),
+            ).clickable(onClick = {}),
     ) {
         Column(modifier = Modifier.align(Alignment.CenterStart)) {
             Text(
