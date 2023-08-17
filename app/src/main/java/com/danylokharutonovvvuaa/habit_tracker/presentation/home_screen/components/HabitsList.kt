@@ -19,13 +19,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
 
 
 @Composable
 fun HabitsList(
-    vm: HomeScreenViewModel
+    vm: HomeScreenViewModel,
+    navController: NavController
 ){
     val listIsEmpty by remember {
         mutableStateOf(true)
@@ -36,16 +38,22 @@ fun HabitsList(
         if (vm.habits.value.isEmpty()){
             item{
                 Box(
-                    modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ){
                     Text(text = "Habit`s is not exist")
                 }
             }
+
+            item{
+                HabitAddCard(vm = vm, navController = navController)
+            }
         } else
         {
             items(vm.habits.value.size){index ->
                 HabitCard(vm.habits.value[index].description, vm)
+            }
+            item{
+                HabitAddCard(vm = vm, navController = navController)
             }
         }
 

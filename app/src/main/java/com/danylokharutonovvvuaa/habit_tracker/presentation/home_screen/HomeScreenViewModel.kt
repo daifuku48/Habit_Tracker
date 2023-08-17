@@ -12,6 +12,7 @@ import com.danylokharutonovvvuaa.habit_tracker.domain.repository.HabitsRepositor
 import com.danylokharutonovvvuaa.habit_tracker.domain.repository.SharedDataRepository
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllCategoriesUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllHabitsUseCase
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetHabitsByCategoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -23,6 +24,7 @@ const val STATE_RECIPE = "STATE_RECIPE"
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
+    private val getHabitsByCategoryUseCase: GetHabitsByCategoryUseCase,
     private val getAllHabitsUseCase: GetAllHabitsUseCase,
     private val sharedDataRepository: SharedDataRepository,
     private val savedStateHandle: SavedStateHandle
@@ -51,9 +53,12 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    fun setCurrentCategory(index: Int){
+    fun setCurrentCategory(item: CategoryDomain){
+        val index = categories.value.indexOf(item)
         currentCategory.value = categories.value[index]
-        //add habits by id
+        viewModelScope.launch {
+            habits.value = getHabitsByCategoryUseCase.execute(categories.value[index])
+        }
     }
 
     fun saveCategoryId(){

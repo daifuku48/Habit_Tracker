@@ -20,11 +20,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +40,8 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple40
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddHabitScreen(navController: NavController, addHabitScreenViewModel: AddHabitScreenViewModel) {
+
+    var habit by remember { mutableStateOf(TextFieldValue("")) }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -54,7 +61,9 @@ fun AddHabitScreen(navController: NavController, addHabitScreenViewModel: AddHab
                         color = Color.Gray,
                         shape = RoundedCornerShape(15.dp)
                     )
-                    .clickable(onClick = {})
+                    .clickable(onClick = {
+                        navController.popBackStack()
+                    })
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.baseline_clear_24),
@@ -69,8 +78,10 @@ fun AddHabitScreen(navController: NavController, addHabitScreenViewModel: AddHab
             Spacer(modifier = Modifier.height(20.dp))
 
             TextField(
-                value = "",
-                onValueChange = {},
+                value = habit,
+                onValueChange = {newText ->
+                    habit = newText
+                },
                 modifier = Modifier
                     .border(
                         BorderStroke(width = 2.dp, color = Purple40),
@@ -92,77 +103,12 @@ fun AddHabitScreen(navController: NavController, addHabitScreenViewModel: AddHab
             Spacer(modifier = Modifier.height(20.dp))
 
             Button(
-                onClick = { /*TODO*/ },
-                modifier = Modifier.align(Alignment.End)
-            ) {
-                Text("Save")
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Composable
-fun pre(){
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.White),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            modifier = Modifier
-                .width(300.dp) // Adjust the width as needed
-                .padding(16.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .border(
-                        width = 1.dp,
-                        color = Color.Gray,
-                        shape = RoundedCornerShape(15.dp)
+                onClick = {
+                    addHabitScreenViewModel.setHabit(
+                        description = habit.text
                     )
-                    .clickable(onClick = {})
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.baseline_clear_24),
-                    contentDescription = "close button"
-                )
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Text("New Habit")
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            TextField(
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .border(
-                        BorderStroke(width = 2.dp, color = Purple40),
-                        shape = RoundedCornerShape(50)
-                    )
-                    .background(Color.Transparent)
-                    .fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                ),
-                textStyle = TextStyle(
-                    fontSize = 20.sp,
-                    color = Color.Black
-                ),
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Button(
-                onClick = { /*TODO*/ },
+                    addHabitScreenViewModel.addHabit()
+                },
                 modifier = Modifier.align(Alignment.End)
             ) {
                 Text("Save")

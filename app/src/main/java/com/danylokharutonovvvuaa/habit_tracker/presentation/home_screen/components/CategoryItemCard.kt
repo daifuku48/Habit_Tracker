@@ -30,7 +30,9 @@ fun ItemCard(item: CategoryDomain, navController: NavController, vm: HomeScreenV
             .background(
                 color = Purple80,
                 shape = RoundedCornerShape(15.dp)
-            ).clickable(onClick = {}),
+            ).clickable(onClick = {
+                vm.setCurrentCategory(item)
+            }),
     ) {
         Column(modifier = Modifier.align(Alignment.CenterStart)) {
             Text(

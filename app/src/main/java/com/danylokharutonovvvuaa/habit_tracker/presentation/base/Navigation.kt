@@ -20,7 +20,6 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.Splash
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    val sharedVM =
     NavHost(navController = navController, startDestination = "splash_screen"){
         composable(route = Screen.SplashScreen.route){
             val entry = remember(it) {

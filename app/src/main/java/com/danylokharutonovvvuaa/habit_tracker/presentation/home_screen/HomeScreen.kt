@@ -109,7 +109,7 @@ fun HomeScreen(
                 HabitText()
                 ShimmerHabitList(isLoading = isLoadingHabits,
                     contentAfterLoading = {
-                        HabitsList(vm = vm)
+                        HabitsList(vm = vm, navController = navController)
                     }
                 )
             }
