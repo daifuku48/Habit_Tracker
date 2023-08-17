@@ -21,7 +21,9 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context,
             HabitsDatabase::class.java, "habits_db"
-        ).build()
+        ).allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
 

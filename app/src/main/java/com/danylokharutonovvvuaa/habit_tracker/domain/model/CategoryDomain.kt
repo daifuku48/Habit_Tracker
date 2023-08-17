@@ -7,7 +7,5 @@ import com.danylokharutonovvvuaa.habit_tracker.data.room.entities.HabitEntity
 data class CategoryDomain(
     var id: Long = 0,
     var category: String,
-    var description: String,
     var countOfActivities: Int,
-    var habitList: List<HabitEntity> = emptyList()
 )

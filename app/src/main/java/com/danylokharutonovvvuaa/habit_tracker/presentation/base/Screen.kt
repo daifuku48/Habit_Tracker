@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.presentation
+package com.danylokharutonovvvuaa.habit_tracker.presentation.base
 
 sealed class Screen(val route: String){
     object SplashScreen : Screen("splash_screen")

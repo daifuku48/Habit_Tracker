@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.CategoryDomain
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.HabitDomain
 import com.danylokharutonovvvuaa.habit_tracker.domain.repository.HabitsRepository
+import com.danylokharutonovvvuaa.habit_tracker.domain.repository.SharedDataRepository
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllCategoriesUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllHabitsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,11 +24,12 @@ const val STATE_RECIPE = "STATE_RECIPE"
 class HomeScreenViewModel @Inject constructor(
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val getAllHabitsUseCase: GetAllHabitsUseCase,
+    private val sharedDataRepository: SharedDataRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     val categories : MutableState<List<CategoryDomain>> = mutableStateOf(ArrayList())
     val habits : MutableState<List<HabitDomain>> = mutableStateOf(ArrayList())
-
+    val currentCategory: MutableState<CategoryDomain?> = mutableStateOf(null)
     init {
         fetchCategories()
     }
@@ -47,5 +49,18 @@ class HomeScreenViewModel @Inject constructor(
 
             }
         }
+    }
+
+    fun setCurrentCategory(index: Int){
+        currentCategory.value = categories.value[index]
+        //add habits by id
+    }
+
+    fun saveCategoryId(){
+        currentCategory.value?.id?.let { sharedDataRepository.setCategoryId(it) }
+    }
+
+    private fun getHabitsByCategory(){
+
     }
 }

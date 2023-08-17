@@ -11,6 +11,5 @@ data class CategoryEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
     var category: String,
-    var description: String,
     var countOfActivities: Int
 )

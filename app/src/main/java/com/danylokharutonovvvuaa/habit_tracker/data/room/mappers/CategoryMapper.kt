@@ -9,7 +9,6 @@ class CategoryMapper : Mapper<CategoryEntity, CategoryDomain> {
         return CategoryDomain(
             id = entityModel.id,
             category = entityModel.category,
-            description = entityModel.description,
             countOfActivities = entityModel.countOfActivities,
         )
     }
@@ -18,7 +17,6 @@ class CategoryMapper : Mapper<CategoryEntity, CategoryDomain> {
         return CategoryEntity(
             id = domainModel.id,
             category = domainModel.category,
-            description = domainModel.description,
             countOfActivities = domainModel.countOfActivities,
         )
     }

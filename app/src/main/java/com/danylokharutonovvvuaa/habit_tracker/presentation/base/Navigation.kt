@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.presentation
+package com.danylokharutonovvvuaa.habit_tracker.presentation.base
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -13,7 +13,6 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.add_habit.AddHabitSc
 import com.danylokharutonovvvuaa.habit_tracker.presentation.add_habit.AddHabitScreenViewModel
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
-import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.SplashImageWithAnimation
 import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.SplashScreen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.SplashScreenViewModel
 
@@ -21,6 +20,7 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.Splash
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
+    val sharedVM =
     NavHost(navController = navController, startDestination = "splash_screen"){
         composable(route = Screen.SplashScreen.route){
             val entry = remember(it) {
