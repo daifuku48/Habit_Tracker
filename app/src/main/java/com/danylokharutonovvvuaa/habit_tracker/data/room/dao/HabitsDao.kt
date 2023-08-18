@@ -14,7 +14,7 @@ interface HabitsDao {
     suspend fun insertCategory(categoriesEntity: CategoryEntity)
 
     @Update
-    suspend fun updateCategories(categoriesEntity: CategoryEntity)
+    suspend fun updateCategory(categoriesEntity: CategoryEntity)
 
     @Insert
     suspend fun insertHabit(habitEntity: HabitEntity)
@@ -30,6 +30,9 @@ interface HabitsDao {
 
     @Query("SELECT * FROM habits_table")
     suspend fun getAllHabits(): List<HabitEntity>
+
+    @Query("SELECT * FROM categories_table WHERE id = :categoryId")
+    suspend fun getCategoryById(categoryId: Long) : CategoryEntity
 
     @Delete
     suspend fun deleteHabit(habitEntity: HabitEntity)

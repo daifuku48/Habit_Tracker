@@ -43,17 +43,23 @@ fun HabitsList(
                     Text(text = "Habit`s is not exist")
                 }
             }
-
-            item{
-                HabitAddCard(vm = vm, navController = navController)
+            if (!vm.isAllCategory.value)
+            {
+                item{
+                    HabitAddCard(vm = vm, navController = navController)
+                }
             }
+
         } else
         {
             items(vm.habits.value.size){index ->
-                HabitCard(vm.habits.value[index].description, vm)
+                HabitCard(vm.habits.value[index], vm)
             }
-            item{
-                HabitAddCard(vm = vm, navController = navController)
+            if (!vm.isAllCategory.value)
+            {
+                item{
+                    HabitAddCard(vm = vm, navController = navController)
+                }
             }
         }
 

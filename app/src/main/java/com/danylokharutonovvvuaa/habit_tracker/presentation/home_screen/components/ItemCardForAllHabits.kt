@@ -39,7 +39,9 @@ fun ItemCardForAllHabits(
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(15.dp)
-            ).clickable(onClick = {})
+            ).clickable(onClick = {
+                vm.fetchCategories()
+            })
     ) {
         Text(
             text = "All",

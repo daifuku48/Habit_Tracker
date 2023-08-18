@@ -18,4 +18,6 @@ interface HabitsRepository {
     suspend fun updateCategory(categoryDomain: CategoryDomain)
 
     suspend fun updateHabit(habitDomain: HabitDomain)
+
+    suspend fun getCategoryById(id: Long) : CategoryDomain
 }

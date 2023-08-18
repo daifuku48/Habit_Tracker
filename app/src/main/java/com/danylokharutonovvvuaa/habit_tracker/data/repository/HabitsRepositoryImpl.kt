@@ -46,6 +46,9 @@ class HabitsRepositoryImpl @Inject constructor(
 
     override suspend fun addHabit(habitDomain: HabitDomain) {
         habitsDao.insertHabit(habitsMapper.domainToEntity(habitDomain))
+        val category = getCategoryById(habitDomain.categoryId)
+        category.countOfActivities = category.countOfActivities + 1
+        habitsDao.updateCategory(categoryMapper.domainToEntity(category))
     }
 
     override suspend fun deleteCategory(categoryDomain: CategoryDomain) {
@@ -57,10 +60,14 @@ class HabitsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateCategory(categoryDomain: CategoryDomain) {
-        habitsDao.updateCategories(categoryMapper.domainToEntity(categoryDomain))
+        habitsDao.updateCategory(categoryMapper.domainToEntity(categoryDomain))
     }
 
     override suspend fun updateHabit(habitDomain: HabitDomain) {
         habitsDao.updateHabit(habitsMapper.domainToEntity(habitDomain))
+    }
+
+    override suspend fun getCategoryById(id: Long): CategoryDomain {
+        return categoryMapper.entityToDomain(habitsDao.getCategoryById(id))
     }
 }

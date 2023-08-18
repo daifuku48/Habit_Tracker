@@ -18,8 +18,6 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
-const val STATE_RECIPE = "STATE_RECIPE"
-
 
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
@@ -31,11 +29,13 @@ class HomeScreenViewModel @Inject constructor(
 ) : ViewModel() {
     val categories : MutableState<List<CategoryDomain>> = mutableStateOf(ArrayList())
     val habits : MutableState<List<HabitDomain>> = mutableStateOf(ArrayList())
-    val currentCategory: MutableState<CategoryDomain?> = mutableStateOf(null)
+    private val currentCategory: MutableState<CategoryDomain?> = mutableStateOf(null)
+    val isAllCategory = mutableStateOf(false)
     init {
         fetchCategories()
     }
-    private fun fetchCategories(){
+
+    fun fetchCategories(){
         viewModelScope.launch {
             try{
                 val result = getAllCategoriesUseCase.execute()
@@ -50,6 +50,8 @@ class HomeScreenViewModel @Inject constructor(
             } catch (_: Exception){
 
             }
+
+            isAllCategory.value = true
         }
     }
 
@@ -58,6 +60,7 @@ class HomeScreenViewModel @Inject constructor(
         currentCategory.value = categories.value[index]
         viewModelScope.launch {
             habits.value = getHabitsByCategoryUseCase.execute(categories.value[index])
+            isAllCategory.value = false
         }
     }
 
@@ -66,6 +69,18 @@ class HomeScreenViewModel @Inject constructor(
     }
 
     private fun getHabitsByCategory(){
+        if (currentCategory.value != null){
+            viewModelScope.launch {
+                habits.value = getHabitsByCategoryUseCase.execute(currentCategory.value!!)
+            }
+        }
+    }
 
+    fun updateHabit(){
+
+    }
+
+    companion object{
+        const val STATE_RECIPE = "STATE_RECIPE"
     }
 }

@@ -27,11 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
+import com.danylokharutonovvvuaa.habit_tracker.domain.model.HabitDomain
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
 
 
 @Composable
-fun HabitCard(habit: String, vm: HomeScreenViewModel){
+fun HabitCard(habit: HabitDomain, vm: HomeScreenViewModel){
 
     val crossedOut = remember { mutableStateOf(false) }
 
@@ -61,11 +62,11 @@ fun HabitCard(habit: String, vm: HomeScreenViewModel){
             shape = RoundedCornerShape(15.dp)
         )
         .clickable {
-            crossedOut.value = !crossedOut.value
+            crossedOut.value = !habit.isFinishedToday
         })
         {
         Text(
-            text = habit,
+            text = habit.description,
             modifier = Modifier
                 .align(Alignment.CenterStart)
                 .padding(

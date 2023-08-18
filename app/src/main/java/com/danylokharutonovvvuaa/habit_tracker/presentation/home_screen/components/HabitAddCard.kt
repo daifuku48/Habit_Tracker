@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
+import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple40
 
 
 @Composable
@@ -33,7 +34,7 @@ fun HabitAddCard(vm: HomeScreenViewModel, navController: NavController){
         .fillMaxWidth()
         .height(50.dp)
         .background(
-            color = Color.White,
+            color = Purple40,
             shape = RoundedCornerShape(15.dp)
         )
         .border(

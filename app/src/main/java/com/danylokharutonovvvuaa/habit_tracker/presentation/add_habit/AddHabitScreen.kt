@@ -108,6 +108,7 @@ fun AddHabitScreen(navController: NavController, addHabitScreenViewModel: AddHab
                         description = habit.text
                     )
                     addHabitScreenViewModel.addHabit()
+                    navController.navigate("home_screen")
                 },
                 modifier = Modifier.align(Alignment.End)
             ) {
