@@ -9,6 +9,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -53,7 +54,10 @@ fun HabitsList(
         } else
         {
             items(vm.habits.value.size){index ->
-                HabitCard(vm.habits.value[index], vm)
+                val habit = vm.habits.value[index]
+                key(habit.id) {
+                    HabitCard(habit, vm)
+                }
             }
             if (!vm.isAllCategory.value)
             {

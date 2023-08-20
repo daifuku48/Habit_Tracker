@@ -65,7 +65,9 @@ fun AddCategoryScreen(navController: NavController, vm: AddCategoryViewModel){
                         color = Color.Gray,
                         shape = RoundedCornerShape(15.dp)
                     )
-                    .clickable(onClick = {})
+                    .clickable(onClick = {
+                        navController.navigate("home_screen")
+                    })
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.baseline_clear_24),
@@ -121,7 +123,7 @@ fun AddCategoryScreen(navController: NavController, vm: AddCategoryViewModel){
                     if (categoryText.text != ""){
                         vm.setCategory(categoryText.text)
                         vm.addCategory()
-                        navController.navigateUp()
+                        navController.navigate("home_screen")
                     }
                 },
                 modifier = Modifier.align(Alignment.End)

@@ -62,7 +62,7 @@ fun AddHabitScreen(navController: NavController, addHabitScreenViewModel: AddHab
                         shape = RoundedCornerShape(15.dp)
                     )
                     .clickable(onClick = {
-                        navController.popBackStack()
+                        navController.navigate("home_screen")
                     })
             ) {
                 Image(

@@ -63,6 +63,14 @@ android {
 
 dependencies {
 
+    //WorkManager
+    // Kotlin + coroutines
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    // optional - Test helpers
+    androidTestImplementation("androidx.work:work-testing:2.8.1")
+    // optional - Multiprocess support
+    implementation("androidx.work:work-multiprocess:2.8.1")
+
     //Hilt
     implementation("com.google.dagger:hilt-android:2.46.1")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
