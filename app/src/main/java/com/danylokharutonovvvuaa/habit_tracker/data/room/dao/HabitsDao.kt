@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.danylokharutonovvvuaa.habit_tracker.data.room.entities.CategoryEntity
+import com.danylokharutonovvvuaa.habit_tracker.data.room.entities.HabitCompletionEntity
 import com.danylokharutonovvvuaa.habit_tracker.data.room.entities.HabitEntity
 
 @Dao
@@ -18,6 +19,9 @@ interface HabitsDao {
 
     @Insert
     suspend fun insertHabit(habitEntity: HabitEntity)
+
+    @Insert
+    suspend fun insertHabitCompletion(habitCompletionEntity: HabitCompletionEntity)
 
     @Update
     suspend fun updateHabit(habitEntity: HabitEntity)

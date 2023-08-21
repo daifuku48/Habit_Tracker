@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.Font
@@ -23,6 +25,9 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 
 @Composable
 fun ItemCard(item: CategoryDomain, navController: NavController, vm: HomeScreenViewModel) {
+
+    val count = remember{ mutableStateOf( item.countOfActivities) }
+
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -36,7 +41,7 @@ fun ItemCard(item: CategoryDomain, navController: NavController, vm: HomeScreenV
     ) {
         Column(modifier = Modifier.align(Alignment.CenterStart)) {
             Text(
-                text = item.countOfActivities.toString() + " habits",
+                text = count.value.toString() + " habits",
                 modifier = Modifier.padding(
                     start = 10.dp
                 )

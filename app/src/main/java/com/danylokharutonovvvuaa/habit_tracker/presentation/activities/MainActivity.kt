@@ -1,8 +1,10 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation.activities
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.danylokharutonovvvuaa.habit_tracker.data.worker.DailyUpdateHabitsWorker
@@ -14,23 +16,19 @@ import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setWorkers()
         setContent {
             Habit_TrackerTheme {
                 Navigation()
             }
-
         }
     }
 
-    fun setWorkers() {
-        val workRequest: PeriodicWorkRequest =
-            PeriodicWorkRequest.Builder(
-                DailyUpdateHabitsWorker::class.java,
-                1,
-                TimeUnit.DAYS)
-                .build()
-        WorkManager.getInstance(this).enqueue(workRequest)
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setWorkers() {
+        WorkManager.getInstance(this).enqueue(DailyUpdateHabitsWorker.enqueueDailyUpdateWork())
     }
 }
