@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components
+package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

@@ -19,6 +19,6 @@ data class HabitCompletionEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
     var habitId: Long,
-    var date: Long,
+    var date: String,
     var isFinished: Boolean
 )

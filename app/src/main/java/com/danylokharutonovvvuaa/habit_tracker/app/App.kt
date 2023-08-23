@@ -13,7 +13,7 @@ import javax.inject.Inject
 class App : Application(), Configuration.Provider {
 
     @Inject
-    private lateinit var workerFactory: CustomWorkerFactory
+    lateinit var workerFactory: CustomWorkerFactory
 
     override fun getWorkManagerConfiguration(): Configuration {
         return Configuration.Builder()

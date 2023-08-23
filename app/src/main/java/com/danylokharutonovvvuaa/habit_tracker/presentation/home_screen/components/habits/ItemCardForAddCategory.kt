@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components
+package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,25 +8,25 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple
+import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
+
 
 
 @Composable
-fun ItemCardForAllHabits(
+fun ItemCardForAddCategory(
     navController: NavController, vm: HomeScreenViewModel
-) {
+){
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -37,17 +37,19 @@ fun ItemCardForAllHabits(
                 shape = RoundedCornerShape(15.dp)
             )
             .background(
-                color = Color.White,
+                color = androidx.compose.ui.graphics.Color.White,
                 shape = RoundedCornerShape(15.dp)
             ).clickable(onClick = {
-                vm.getAllHabits()
+                navController.navigate("add_category")
             })
-    ) {
-        Text(
-            text = "All",
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.baseline_add_category),
+            contentDescription = "add category",
             modifier = Modifier
-                .align(Alignment.Center),
-            fontSize = 32.sp
+                .align(Alignment.Center)
+                .size(60.dp)
         )
     }
 }
+

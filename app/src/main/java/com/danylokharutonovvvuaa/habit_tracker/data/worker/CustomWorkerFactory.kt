@@ -8,8 +8,7 @@ import com.danylokharutonovvvuaa.habit_tracker.domain.repository.HabitsRepositor
 import javax.inject.Inject
 
 class CustomWorkerFactory @Inject constructor(
-    private val repository: HabitsRepository,
-
+    private val repository: HabitsRepository
 ) : WorkerFactory() {
     override fun createWorker(
         appContext: Context,

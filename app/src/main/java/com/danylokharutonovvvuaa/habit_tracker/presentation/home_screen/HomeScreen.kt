@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -19,21 +17,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesItemsList
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.CategoriesText
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.HabitText
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.HabitsList
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.ShimmerCategoryItemList
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.ShimmerHabitList
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories.CategoriesItemsList
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories.CategoriesText
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.HabitText
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.HabitsList
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories.ShimmerCategoryItemList
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.ShimmerHabitList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -95,6 +88,7 @@ fun HomeScreen(
                 }
             )
         },
+
         content = { paddingValues ->
             Column(
                 modifier = Modifier

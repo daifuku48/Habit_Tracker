@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components
+package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
@@ -8,6 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.ItemCardForAddCategory
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.ItemCardForAllHabits
 
 @Composable
 fun CategoriesItemsList(

@@ -12,7 +12,7 @@ import com.danylokharutonovvvuaa.habit_tracker.data.room.entities.HabitEntity
     entities = [CategoryEntity::class,
     HabitEntity::class,
     HabitCompletionEntity::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class HabitsDatabase : RoomDatabase(){

@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components
+package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
