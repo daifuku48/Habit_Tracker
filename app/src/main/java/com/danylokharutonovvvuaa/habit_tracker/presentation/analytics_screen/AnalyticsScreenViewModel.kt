@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen
+package com.danylokharutonovvvuaa.habit_tracker.presentation.analytics_screen
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class SplashScreenViewModel @Inject constructor(
+class AnalyticsScreenViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 }

@@ -14,6 +14,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -31,12 +36,13 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScre
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationDrawer(
+    drawerState: DrawerState,
   //  navController: NavController,
 //    vm: HomeScreenViewModel
 ){
-
 }
 
 

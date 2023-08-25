@@ -19,7 +19,10 @@ import kotlinx.coroutines.delay
 
 
 @Composable
-fun SplashScreen(navController: NavController, splashScreenViewModel: SplashScreenViewModel){
+fun SplashScreen(
+    navController: NavController,
+    splashScreenViewModel: SplashScreenViewModel
+) {
     Habit_TrackerTheme {
         SplashImageWithAnimation(
             imageId = R.drawable.logo_compose,
@@ -30,7 +33,10 @@ fun SplashScreen(navController: NavController, splashScreenViewModel: SplashScre
 
 
 @Composable
-fun SplashImageWithAnimation(imageId: Int, navController: NavController){
+fun SplashImageWithAnimation(
+    imageId: Int,
+    navController: NavController
+){
     val scale = remember {
         androidx.compose.animation.core.Animatable(0f)
     }

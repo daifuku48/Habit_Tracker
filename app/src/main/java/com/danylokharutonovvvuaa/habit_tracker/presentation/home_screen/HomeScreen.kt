@@ -3,12 +3,19 @@ package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -27,6 +34,10 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.componen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.HabitsList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories.ShimmerCategoryItemList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.ShimmerHabitList
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.DrawerBody
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.DrawerHeader
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.MenuItem
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.NavigationDrawer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -36,7 +47,7 @@ fun HomeScreen(
     navController: NavController, vm: HomeScreenViewModel
 ) {
     val coroutineScope = rememberCoroutineScope()
-
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     var isLoadingCategories by remember {
         mutableStateOf(true)
     }
@@ -51,64 +62,84 @@ fun HomeScreen(
         delay(1000L)
         isLoadingHabits = false
     }
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.good_habits)
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        coroutineScope.launch {
-
-                        }
-                    }) {
-                        Icon(
-                            painter = painterResource(
-                                id = R.drawable.baseline_dehaze_24
-                            ),
-                            contentDescription = null
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = {
-                        coroutineScope.launch {
-
-                        }
-                    }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.notification),
-                            contentDescription = null
-                        )
-                    }
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            DrawerHeader()
+            DrawerBody(
+            listItem = listOf(
+                MenuItem(0, "Home", Icons.Default.Home),
+                MenuItem(1, "Analytics", Icons.Default.Star),
+                MenuItem(2, "Settings", Icons.Default.Settings)
+            ),
+            scope = coroutineScope,
+            onItemClick = {
+                when(it.id){
+                    0 -> navController.navigate("home_screen")
+                    1 -> navController.navigate("analytics_screen")
+                    2 -> navController.navigate("settings_screen")
                 }
-            )
-        },
+            }
+        )
+    }) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = stringResource(R.string.good_habits)
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            coroutineScope.launch {
+                                drawerState.open()
+                            }
+                        }) {
+                            Icon(
+                                painter = painterResource(
+                                    id = R.drawable.baseline_dehaze_24
+                                ),
+                                contentDescription = null
+                            )
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = {
+                            coroutineScope.launch {
 
-        content = { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-                CategoriesText()
-                ShimmerCategoryItemList(isLoading = isLoadingCategories,
-                    contentAfterLoading = {
-                        CategoriesItemsList(vm = vm, navController = navController)
-                    })
-                HabitText()
-                ShimmerHabitList(isLoading = isLoadingHabits,
-                    contentAfterLoading = {
-                        HabitsList(vm = vm, navController = navController)
+                            }
+                        }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.notification),
+                                contentDescription = null
+                            )
+                        }
                     }
                 )
+            },
+
+            content = { paddingValues ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                ) {
+                    CategoriesText()
+                    ShimmerCategoryItemList(isLoading = isLoadingCategories,
+                        contentAfterLoading = {
+                            CategoriesItemsList(vm = vm, navController = navController)
+                        })
+                    HabitText()
+                    ShimmerHabitList(isLoading = isLoadingHabits,
+                        contentAfterLoading = {
+                            HabitsList(vm = vm, navController = navController)
+                        }
+                    )
+                }
             }
-        }
-    )
+        )   
+    }
 }
 
 

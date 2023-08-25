@@ -6,4 +6,6 @@ sealed class Screen(val route: String){
     object AddCategory : Screen("add_category")
     object AddHabit : Screen("add_habit")
     object AnalyticsScreen : Screen("analytics_screen")
+
+    object SettingsScreen : Screen("settings_screen")
 }
