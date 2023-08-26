@@ -2,6 +2,7 @@ package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.compone
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -10,10 +11,16 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,26 +34,27 @@ import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnimatedCircularImageWithBorder(
-//    vm: HomeScreenViewModel
+    vm: HomeScreenViewModel,
+    drawerState: DrawerState
 ) {
-    val animatedProgress = remember { Animatable(initialValue = 0f) }
+    vm.getCompletedHabits()
+    val animatedProgress = animateFloatAsState(
+        targetValue = if (drawerState.isOpen) vm.completedPercentOfHabits.value else 0f,
+        animationSpec = tween(
+            durationMillis = if (drawerState.isOpen) 1500 else 1,
+            easing = LinearEasing
+        ), label = ""
+    ).value
 
-    LaunchedEffect(Unit) {
-        animatedProgress.animateTo(
-            targetValue = 0.7f,
-            animationSpec = tween(
-                durationMillis = 1300,
-                easing = LinearEasing
-            )
-        )
-    }
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Purple80),
+            .background(Purple80)
+            .padding(),
         contentAlignment = Alignment.Center
     ) {
 
@@ -70,7 +78,7 @@ fun AnimatedCircularImageWithBorder(
                     shape = CircleShape
                 )
         ){
-            val sweepAngle = animatedProgress.value * 360
+            val sweepAngle = animatedProgress * 360
             drawArc(
                 color = Color.Red,
                 startAngle = -90f,

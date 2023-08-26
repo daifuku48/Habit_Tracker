@@ -1,5 +1,6 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -12,6 +13,7 @@ import com.danylokharutonovvvuaa.habit_tracker.domain.repository.HabitsRepositor
 import com.danylokharutonovvvuaa.habit_tracker.domain.repository.SharedDataRepository
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllCategoriesUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllHabitsUseCase
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetCompletedHabitsUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetHabitsByCategoryUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.UpdateHabitIsFinishedToday
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,12 +29,14 @@ class HomeScreenViewModel @Inject constructor(
     private val getAllHabitsUseCase: GetAllHabitsUseCase,
     private val updateHabitIsFinishedToday: UpdateHabitIsFinishedToday,
     private val sharedDataRepository: SharedDataRepository,
+    private val getCompletedHabitsUseCase: GetCompletedHabitsUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     val categories : MutableState<List<CategoryDomain>> = mutableStateOf(ArrayList())
     val habits : MutableState<List<HabitDomain>> = mutableStateOf(ArrayList())
     private val currentCategory: MutableState<CategoryDomain?> = mutableStateOf(null)
     val isAllCategory = mutableStateOf(false)
+    val completedPercentOfHabits : MutableState<Float> = mutableStateOf(0f)
     init {
         fetchCategories()
     }
@@ -99,6 +103,13 @@ class HomeScreenViewModel @Inject constructor(
             habits.value = habits.value.toMutableList().apply {
                 this[index] = this[index].copy(isFinishedToday = !this[index].isFinishedToday)
             }
+        }
+    }
+
+    fun getCompletedHabits() {
+        viewModelScope.launch {
+            completedPercentOfHabits.value = getCompletedHabitsUseCase.execute()
+            Log.d("count", completedPercentOfHabits.value.toString())
         }
     }
 

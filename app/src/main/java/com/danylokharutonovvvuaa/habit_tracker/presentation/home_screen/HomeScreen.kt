@@ -37,7 +37,6 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.componen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.DrawerBody
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.DrawerHeader
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.MenuItem
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.NavigationDrawer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -65,22 +64,24 @@ fun HomeScreen(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            DrawerHeader()
-            DrawerBody(
-            listItem = listOf(
-                MenuItem(0, "Home", Icons.Default.Home),
-                MenuItem(1, "Analytics", Icons.Default.Star),
-                MenuItem(2, "Settings", Icons.Default.Settings)
-            ),
-            scope = coroutineScope,
-            onItemClick = {
-                when(it.id){
-                    0 -> navController.navigate("home_screen")
-                    1 -> navController.navigate("analytics_screen")
-                    2 -> navController.navigate("settings_screen")
-                }
+            Column {
+                DrawerHeader(drawerState = drawerState, vm = vm)
+                DrawerBody(
+                    listItem = listOf(
+                        MenuItem(0, "Home", Icons.Default.Home),
+                        MenuItem(1, "Analytics", Icons.Default.Star),
+                        MenuItem(2, "Settings", Icons.Default.Settings)
+                    ),
+                    scope = coroutineScope,
+                    onItemClick = {
+                        when(it.id){
+                            0 -> navController.navigate("home_screen")
+                            1 -> navController.navigate("analytics_screen")
+                            2 -> navController.navigate("settings_screen")
+                        }
+                    }
+                )
             }
-        )
     }) {
         Scaffold(
             topBar = {

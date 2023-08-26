@@ -5,6 +5,7 @@ import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.AddCategoryUseCa
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.AddHabitUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllCategoriesUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllHabitsUseCase
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetCompletedHabitsUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetHabitsByCategoryUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.UpdateHabitIsFinishedToday
 import dagger.Module
@@ -54,5 +55,12 @@ object DomainModule {
     @Singleton
     fun providesUpdateHabitIsFinishedToday(repository: HabitsRepository) : UpdateHabitIsFinishedToday {
         return UpdateHabitIsFinishedToday(repository = repository)
+    }
+
+
+    @Provides
+    @Singleton
+    fun providesGetCompletedHabitsUseCase(repository: HabitsRepository) : GetCompletedHabitsUseCase {
+        return GetCompletedHabitsUseCase(repository = repository)
     }
 }

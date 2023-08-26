@@ -3,9 +3,13 @@ package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.compone
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,20 +24,24 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScre
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DrawerHeader(
-    //navController: NavController,
-    //vm: HomeScreenViewModel
+    vm: HomeScreenViewModel,
+    drawerState: DrawerState
 ){
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = 64.dp)
+            .fillMaxWidth()
+            .padding(
+                end = 70.dp
+            )
             .background(Purple80),
         contentAlignment = Alignment.Center,
     ){
         Column {
-            AnimatedCircularImageWithBorder()
+            Spacer(Modifier.height(20.dp))
+            AnimatedCircularImageWithBorder(vm = vm, drawerState = drawerState)
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -43,13 +51,9 @@ fun DrawerHeader(
                 textAlign = TextAlign.Center,
                 fontSize = 24.sp
             )
+            Spacer(Modifier.height(20.dp))
         }
 
     }
 }
 
-@Preview
-@Composable
-fun DrawerHeaderPreview(){
-    DrawerHeader()
-}
