@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -59,7 +60,7 @@ fun HabitCard(habit: HabitDomain, vm: HomeScreenViewModel) {
                 isTextStruckThrough = !isTextStruckThrough // Изменяем состояние при клике
                 habit.isFinishedToday = !habit.isFinishedToday
                 vm.updateHabit(habit)
-            }
+            }.draggable()
     ) {
         Text(
             text = habit.description,
