@@ -50,7 +50,7 @@ fun HabitCard(habit: HabitDomain, vm: HomeScreenViewModel) {
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(15.dp)
-            )
+            )...
             .border(
                 width = 2.dp,
                 color = Color.Black,
