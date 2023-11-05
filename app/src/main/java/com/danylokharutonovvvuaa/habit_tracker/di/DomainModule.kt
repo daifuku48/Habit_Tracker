@@ -3,11 +3,11 @@ package com.danylokharutonovvvuaa.habit_tracker.di
 import com.danylokharutonovvvuaa.habit_tracker.domain.repository.HabitsRepository
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.AddCategoryUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.AddHabitUseCase
-import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllCategoriesUseCase
-import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllHabitsUseCase
-import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetCompletedHabitsUseCase
-import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetHabitsByCategoryUseCase
-import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.UpdateHabitIsFinishedToday
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.GetAllCategoriesUseCase
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.GetAllHabitsUseCase
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.GetCompletedHabitsUseCase
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.GetHabitsByCategoryUseCase
+import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.UpdateHabitIsFinishedToday
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,7 +47,7 @@ object DomainModule {
 
     @Provides
     @Singleton
-    fun providesGetHabitsByCategoryUseCase(repository: HabitsRepository) : GetHabitsByCategoryUseCase{
+    fun providesGetHabitsByCategoryUseCase(repository: HabitsRepository) : GetHabitsByCategoryUseCase {
         return GetHabitsByCategoryUseCase(repository = repository)
     }
 

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.CategoryDomain
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.AddCategoryUseCase
-import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.GetAllHabitsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

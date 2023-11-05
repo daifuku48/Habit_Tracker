@@ -1,4 +1,4 @@
-package com.danylokharutonovvvuaa.habit_tracker.domain.use_cases
+package com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen
 
 import com.danylokharutonovvvuaa.habit_tracker.domain.repository.HabitsRepository
 import javax.inject.Inject

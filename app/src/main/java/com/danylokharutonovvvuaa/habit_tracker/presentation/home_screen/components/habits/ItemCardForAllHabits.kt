@@ -1,6 +1,5 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -13,12 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.danylokharutonovvvuaa.habit_tracker.R
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple
 
@@ -40,7 +36,7 @@ fun ItemCardForAllHabits(
                 color = Color.White,
                 shape = RoundedCornerShape(15.dp)
             ).clickable(onClick = {
-                vm.getAllHabits()
+                vm.handleGetAllHabits()
             })
     ) {
         Text(

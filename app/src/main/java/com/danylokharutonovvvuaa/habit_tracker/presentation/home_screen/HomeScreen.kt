@@ -110,9 +110,7 @@ fun HomeScreen(
                     },
                     actions = {
                         IconButton(onClick = {
-                            coroutineScope.launch {
 
-                            }
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.notification),
