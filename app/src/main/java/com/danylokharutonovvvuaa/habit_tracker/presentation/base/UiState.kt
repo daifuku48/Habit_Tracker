@@ -1,0 +1,3 @@
+package com.danylokharutonovvvuaa.habit_tracker.presentation.base
+
+interface UiState

@@ -28,11 +28,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.danylokharutonovvvuaa.habit_tracker.R
+import com.danylokharutonovvvuaa.habit_tracker.presentation.activities.MainActivity.Companion.SHIMMER_ITEMS
+import com.danylokharutonovvvuaa.habit_tracker.presentation.base.Screen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories.CategoriesItemsList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories.CategoriesText
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories.ShimmerCategoryItemList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.HabitText
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.HabitsList
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.categories.ShimmerCategoryItemList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.ShimmerHabitList
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.DrawerBody
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer.DrawerHeader
@@ -55,12 +57,13 @@ fun HomeScreen(
         mutableStateOf(true)
     }
 
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = SHIMMER_ITEMS) {
         delay(2000L)
         isLoadingCategories = false
         delay(1000L)
         isLoadingHabits = false
     }
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -68,21 +71,21 @@ fun HomeScreen(
                 DrawerHeader(drawerState = drawerState, vm = vm)
                 DrawerBody(
                     listItem = listOf(
-                        MenuItem(0, "Home", Icons.Default.Home),
-                        MenuItem(1, "Analytics", Icons.Default.Star),
-                        MenuItem(2, "Settings", Icons.Default.Settings)
+                        MenuItem(0, stringResource(R.string.home), Icons.Default.Home),
+                        MenuItem(1, stringResource(R.string.analytics), Icons.Default.Star),
+                        MenuItem(2, stringResource(R.string.settings), Icons.Default.Settings)
                     ),
                     scope = coroutineScope,
                     onItemClick = {
-                        when(it.id){
-                            0 -> navController.navigate("home_screen")
-                            1 -> navController.navigate("analytics_screen")
-                            2 -> navController.navigate("settings_screen")
+                        when (it.id) {
+                            0 -> navController.navigate(Screen.HomeScreen.route)
+                            1 -> navController.navigate(Screen.AnalyticsScreen.route)
+                            2 -> navController.navigate(Screen.SettingsScreen.route)
                         }
                     }
                 )
             }
-    }) {
+        }) {
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -139,7 +142,7 @@ fun HomeScreen(
                     )
                 }
             }
-        )   
+        )
     }
 }
 

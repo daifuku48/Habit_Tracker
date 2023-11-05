@@ -50,7 +50,7 @@ fun HabitCard(habit: HabitDomain, vm: HomeScreenViewModel) {
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(15.dp)
-            )....
+            )
             .border(
                 width = 2.dp,
                 color = Color.Black,
@@ -60,7 +60,7 @@ fun HabitCard(habit: HabitDomain, vm: HomeScreenViewModel) {
                 isTextStruckThrough = !isTextStruckThrough // Изменяем состояние при клике
                 habit.isFinishedToday = !habit.isFinishedToday
                 vm.updateHabit(habit)
-            }.draggable()
+            }
     ) {
         Text(
             text = habit.description,

@@ -1,73 +1,56 @@
 package com.danylokharutonovvvuaa.habit_tracker.data.repository
 
 import com.danylokharutonovvvuaa.habit_tracker.data.room.dao.HabitsDao
-import com.danylokharutonovvvuaa.habit_tracker.data.room.mappers.CategoryMapper
-import com.danylokharutonovvvuaa.habit_tracker.data.room.mappers.HabitsMapper
+import com.danylokharutonovvvuaa.habit_tracker.data.room.entities.toDomain
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.CategoryDomain
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.HabitDomain
+import com.danylokharutonovvvuaa.habit_tracker.domain.model.toEntity
 import com.danylokharutonovvvuaa.habit_tracker.domain.repository.HabitsRepository
 import javax.inject.Inject
 
 class HabitsRepositoryImpl @Inject constructor(
-    private val habitsDao: HabitsDao,
-    private val categoryMapper: CategoryMapper,
-    private val habitsMapper: HabitsMapper
+    private val habitsDao: HabitsDao
 ) : HabitsRepository {
     override suspend fun getAllHabitsFromCategory(id: Long): List<HabitDomain> {
-        val list = habitsDao.getHabitsByCategory(id)
-        val domainList = mutableListOf<HabitDomain>()
-        for (item in list){
-            domainList.add(habitsMapper.entityToDomain(item))
-        }
-        return domainList
+        return habitsDao.getHabitsByCategory(id).map { it.toDomain() }
     }
 
     override suspend fun getAllCategories(): List<CategoryDomain> {
-        val list = habitsDao.getAllCategories()
-        val domainList = mutableListOf<CategoryDomain>()
-        for (item in list){
-            domainList.add(categoryMapper.entityToDomain(item))
-        }
-        return domainList
+        return habitsDao.getAllCategories().map { it.toDomain() }
     }
 
     override suspend fun getAllHabits(): List<HabitDomain> {
-        val list = habitsDao.getAllHabits()
-        val domainList = mutableListOf<HabitDomain>()
-        for (item in list){
-            domainList.add(habitsMapper.entityToDomain(item))
-        }
-        return domainList
+        return habitsDao.getAllHabits().map { it.toDomain() }
     }
 
     override suspend fun addCategory(categoryDomain: CategoryDomain) {
-        habitsDao.insertCategory(categoryMapper.domainToEntity(categoryDomain))
+        habitsDao.insertCategory(categoryDomain.toEntity())
     }
 
     override suspend fun addHabit(habitDomain: HabitDomain) {
-        habitsDao.insertHabit(habitsMapper.domainToEntity(habitDomain))
+        habitsDao.insertHabit(habitDomain.toEntity())
         val category = getCategoryById(habitDomain.categoryId)
         category.countOfActivities = category.countOfActivities + 1
-        habitsDao.updateCategory(categoryMapper.domainToEntity(category))
+        habitsDao.updateCategory(category.toEntity())
     }
 
     override suspend fun deleteCategory(categoryDomain: CategoryDomain) {
-        habitsDao.deleteCategory(categoryMapper.domainToEntity(categoryDomain))
+        habitsDao.deleteCategory(categoryDomain.toEntity())
     }
 
     override suspend fun deleteHabit(habitDomain: HabitDomain) {
-        habitsDao.deleteHabit(habitsMapper.domainToEntity(habitDomain))
+        habitsDao.deleteHabit(habitDomain.toEntity())
     }
 
     override suspend fun updateCategory(categoryDomain: CategoryDomain) {
-        habitsDao.updateCategory(categoryMapper.domainToEntity(categoryDomain))
+        habitsDao.updateCategory(categoryDomain.toEntity())
     }
 
     override suspend fun updateHabit(habitDomain: HabitDomain) {
-        habitsDao.updateHabit(habitsMapper.domainToEntity(habitDomain))
+        habitsDao.updateHabit(habitDomain.toEntity())
     }
 
     override suspend fun getCategoryById(id: Long): CategoryDomain {
-        return categoryMapper.entityToDomain(habitsDao.getCategoryById(id))
+        return habitsDao.getCategoryById(id).toDomain()
     }
 }

@@ -27,7 +27,7 @@ interface HabitsDao {
     suspend fun updateHabit(habitEntity: HabitEntity)
 
     @Query("SELECT * FROM CATEGORIES_TABLE")
-    suspend fun getAllCategories() : List<CategoryEntity>
+    suspend fun getAllCategories(): List<CategoryEntity>
 
     @Query("SELECT * FROM habits_table WHERE categoryId = :categoryId")
     suspend fun getHabitsByCategory(categoryId: Long): List<HabitEntity>
@@ -36,7 +36,7 @@ interface HabitsDao {
     suspend fun getAllHabits(): List<HabitEntity>
 
     @Query("SELECT * FROM categories_table WHERE id = :categoryId")
-    suspend fun getCategoryById(categoryId: Long) : CategoryEntity
+    suspend fun getCategoryById(categoryId: Long): CategoryEntity
 
     @Delete
     suspend fun deleteHabit(habitEntity: HabitEntity)

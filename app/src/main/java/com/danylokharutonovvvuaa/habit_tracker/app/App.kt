@@ -3,7 +3,6 @@ package com.danylokharutonovvvuaa.habit_tracker.app
 import android.app.Application
 import android.util.Log
 import androidx.work.Configuration
-import androidx.work.WorkManager
 import com.danylokharutonovvvuaa.habit_tracker.data.worker.CustomWorkerFactory
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject

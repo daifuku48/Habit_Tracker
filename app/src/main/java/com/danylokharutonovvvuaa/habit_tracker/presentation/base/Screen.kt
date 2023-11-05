@@ -1,11 +1,17 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation.base
 
-sealed class Screen(val route: String){
-    object SplashScreen : Screen("splash_screen")
-    object HomeScreen : Screen("home_screen")
-    object AddCategory : Screen("add_category")
-    object AddHabit : Screen("add_habit")
-    object AnalyticsScreen : Screen("analytics_screen")
+sealed class Screen(val route: String) {
+    object HomeScreen : Screen(HOME_SCREEN)
+    object AddCategory : Screen(ADD_CATEGORY)
+    object AddHabit : Screen(ADD_HABIT)
+    object AnalyticsScreen : Screen(ANALYTICS_SCREEN)
+    object SettingsScreen : Screen(SETTINGS_SCREEN)
 
-    object SettingsScreen : Screen("settings_screen")
+    companion object{
+        const val HOME_SCREEN = "home_screen"
+        const val ADD_CATEGORY = "home_screen"
+        const val ADD_HABIT = "add_habit"
+        const val ANALYTICS_SCREEN = "analytics_screen"
+        const val SETTINGS_SCREEN = "settings_screen"
+    }
 }

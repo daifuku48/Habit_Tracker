@@ -10,11 +10,11 @@ import com.danylokharutonovvvuaa.habit_tracker.data.room.entities.HabitEntity
 
 @Database(
     entities = [CategoryEntity::class,
-    HabitEntity::class,
-    HabitCompletionEntity::class],
+        HabitEntity::class,
+        HabitCompletionEntity::class],
     version = 5,
     exportSchema = false
 )
-abstract class HabitsDatabase : RoomDatabase(){
+abstract class HabitsDatabase : RoomDatabase() {
     abstract fun habitsDAO(): HabitsDao
 }
