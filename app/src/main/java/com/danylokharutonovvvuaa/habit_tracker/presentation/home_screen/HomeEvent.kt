@@ -15,7 +15,7 @@ sealed class HomeEvent : UiEvent{
     object HabitsIsLoadedEvent: HomeEvent()
     object CategoriesIsLoadedEvent: HomeEvent()
     data class UpdateHabitEvent(val habit: HabitDomain): HomeEvent()
-    data class HabitIsUpdated(val habit: HabitDomain): HomeEvent()
+    data class HabitIsUpdated(val habitList: PersistentList<HabitDomain>): HomeEvent()
     object GetPercentOfCompletedHabits: HomeEvent()
     data class PercentOfCompletedHabitsIsReceived(val percent: Float): HomeEvent()
     object ErrorEvent: HomeEvent()

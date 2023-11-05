@@ -1,7 +1,6 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen
 
 import com.danylokharutonovvvuaa.habit_tracker.presentation.base.Reducer
-import kotlinx.collections.immutable.toPersistentList
 
 class HomeScreenReducer : Reducer<HomeState, HomeEvent> {
     override fun reduce(state: HomeState, event: HomeEvent): HomeState {
@@ -16,12 +15,9 @@ class HomeScreenReducer : Reducer<HomeState, HomeEvent> {
             is HomeEvent.SetCurrentCategoryEvent -> state.copy(currentCategory = event.categoryDomain)
             is HomeEvent.GetAllHabitsByCategoryEvent -> state
             is HomeEvent.UpdateHabitEvent -> state
-            is HomeEvent.HabitIsUpdated -> state.copy(habitList = state.habitList.map { habit ->
-                if (habit == event.habit) {
-                    habit.isFinishedToday = !habit.isFinishedToday
-                }
-                habit
-            }.toPersistentList())
+            is HomeEvent.HabitIsUpdated -> state.copy(habitList = event.habitList)
+            is HomeEvent.GetPercentOfCompletedHabits -> state
+            is HomeEvent.PercentOfCompletedHabitsIsReceived -> state.copy(completedPercentHabits = event.percent)
         }
     }
 }

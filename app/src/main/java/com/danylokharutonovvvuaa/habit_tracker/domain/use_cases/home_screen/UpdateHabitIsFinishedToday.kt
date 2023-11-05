@@ -15,7 +15,10 @@ class UpdateHabitIsFinishedToday @Inject constructor(
     }
 
     override suspend fun execute(state: HomeState, event: HomeEvent): HomeEvent {
-        TODO("Not yet implemented")
+        return if (event is HomeEvent.UpdateHabitEvent){
+            repository.updateHabit(event.habit)
+            HomeEvent.HabitIsUpdated(repository.getAllHabits())
+        } else HomeEvent.ErrorEvent
     }
 
     override fun canHandle(event: HomeEvent): Boolean {
