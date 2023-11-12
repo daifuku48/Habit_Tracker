@@ -27,7 +27,7 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DrawerHeader(
-    vm: HomeScreenViewModel,
+    completedPercent: Float,
     drawerState: DrawerState
 ){
     Box(
@@ -41,7 +41,7 @@ fun DrawerHeader(
     ){
         Column {
             Spacer(Modifier.height(20.dp))
-            AnimatedCircularImageWithBorder(vm = vm, drawerState = drawerState)
+            AnimatedCircularImageWithBorder(completedPercentOfHabits = completedPercent, drawerState = drawerState)
             Text(
                 modifier = Modifier
                     .fillMaxWidth()

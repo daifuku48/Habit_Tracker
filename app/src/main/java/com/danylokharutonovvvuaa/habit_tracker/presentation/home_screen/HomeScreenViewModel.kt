@@ -1,15 +1,13 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.CategoryDomain
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.HabitDomain
 import com.danylokharutonovvvuaa.habit_tracker.presentation.base.BaseViewModel
+import com.danylokharutonovvvuaa.habit_tracker.presentation.base.Screen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.base.UseCase
 import com.danylokharutonovvvuaa.habit_tracker.presentation.base.navigation.AppNavigator
+import com.danylokharutonovvvuaa.habit_tracker.presentation.base.navigation.Navigator
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -17,8 +15,7 @@ import javax.inject.Inject
 class HomeScreenViewModel @Inject constructor(
     reducer: HomeScreenReducer,
     useCases: List<UseCase<HomeState, HomeEvent>>,
-    appNavigator: AppNavigator,
-    private val savedStateHandle: SavedStateHandle
+    appNavigator: Navigator,
 ) : BaseViewModel<HomeEvent, HomeState>(reducer, useCases, appNavigator) {
     init {
         handleFetchCategories()
@@ -36,9 +33,21 @@ class HomeScreenViewModel @Inject constructor(
         handleEvent(HomeEvent.SetCurrentCategoryEvent(item))
     }
 
-//    fun saveCategoryId() {
-//        currentCategory.value?.id?.let { sharedDataRepository.setCategoryId(it) }
-//    }
+    fun navigateToAddCategory(){
+        appNavigator.navigateTo(Screen.AddCategory.route)
+    }
+
+    fun navigateToAddHabit(){
+        appNavigator.navigateTo(Screen.AddHabit.route)
+    }
+
+    fun habitIsLoaded(){
+        handleEvent(HomeEvent.HabitsIsLoadedEvent)
+    }
+
+    fun categoriesIsLoaded(){
+        handleEvent(HomeEvent.CategoriesIsLoadedEvent)
+    }
 
     private fun getHabitsByCategory(){
         handleEvent(HomeEvent.GetAllHabitsByCategoryEvent)
@@ -48,12 +57,8 @@ class HomeScreenViewModel @Inject constructor(
         handleEvent(HomeEvent.UpdateHabitEvent(habit))
     }
 
-    fun getCompletedHabits() {
-        handleEvent()
-        viewModelScope.launch {
-            completedPercentOfHabits.value = getCompletedHabitsUseCase.execute()
-            Log.d("count", completedPercentOfHabits.value.toString())
-        }
+    fun getCompetedPercentHabits() {
+        handleEvent(HomeEvent.GetPercentOfCompletedHabits)
     }
 
     override fun createInitialState(): HomeState {

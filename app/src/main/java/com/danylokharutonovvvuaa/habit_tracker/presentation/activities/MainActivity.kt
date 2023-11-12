@@ -6,7 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -18,15 +20,11 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.add_habit.AddHabitSc
 import com.danylokharutonovvvuaa.habit_tracker.presentation.analytics_screen.AnalyticsScreen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.analytics_screen.AnalyticsScreenViewModel
 import com.danylokharutonovvvuaa.habit_tracker.presentation.base.Screen
-import com.danylokharutonovvvuaa.habit_tracker.presentation.base.Screen.Companion.HOME_SCREEN
-import com.danylokharutonovvvuaa.habit_tracker.presentation.base.navigation.AppNavigator
 import com.danylokharutonovvvuaa.habit_tracker.presentation.base.navigation.Navigator
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
 import com.danylokharutonovvvuaa.habit_tracker.presentation.settings_screen.SettingsScreen
 import com.danylokharutonovvvuaa.habit_tracker.presentation.settings_screen.SettingsScreenViewModel
-import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.SplashScreen
-import com.danylokharutonovvvuaa.habit_tracker.presentation.splash_screen.SplashScreenViewModel
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Habit_TrackerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -38,17 +36,23 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             Habit_TrackerTheme {
                 val navController = rememberNavController()
+                navigator.attach(navController)
+                DisposableEffect(key1 = DETACH_NAV_CONTROLLER){
+                    onDispose {
+                        navigator.detach()
+                    }
+                }
                 NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
-
                     composable(route = Screen.HomeScreen.route) {
                         val entry = remember(it) {
                             navController.getBackStackEntry(Screen.HomeScreen.route)
                         }
                         val homeVM = hiltViewModel<HomeScreenViewModel>(entry)
-                        HomeScreen(navController = navController, vm = homeVM)
+                        HomeScreen(navController = navController, viewModel = homeVM)
                     }
 
                     composable(route = Screen.AddCategory.route) {
@@ -92,5 +96,6 @@ class MainActivity : ComponentActivity() {
 
     companion object {
         const val SHIMMER_ITEMS = "SHIMMER_ITEMS"
+        const val DETACH_NAV_CONTROLLER = "DETACH_NAV_CONTROLLER"
     }
 }

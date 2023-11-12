@@ -1,6 +1,5 @@
 package com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.navigation_drawer
 
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -9,19 +8,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,12 +30,12 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnimatedCircularImageWithBorder(
-    vm: HomeScreenViewModel,
+    completedPercentOfHabits: Float,
     drawerState: DrawerState
 ) {
-    vm.getCompletedHabits()
+
     val animatedProgress = animateFloatAsState(
-        targetValue = if (drawerState.isOpen) vm.completedPercentOfHabits.value else 0f,
+        targetValue = if (drawerState.isOpen) completedPercentOfHabits else 0f,
         animationSpec = tween(
             durationMillis = if (drawerState.isOpen) 1500 else 1,
             easing = LinearEasing

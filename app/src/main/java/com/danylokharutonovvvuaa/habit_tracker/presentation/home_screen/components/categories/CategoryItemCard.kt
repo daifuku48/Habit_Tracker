@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -24,10 +25,11 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScre
 import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 
 @Composable
-fun ItemCard(item: CategoryDomain, navController: NavController, vm: HomeScreenViewModel) {
-
-    val count = remember{ mutableStateOf( item.countOfActivities) }
-
+fun ItemCard(
+    item: CategoryDomain,
+    count: Int,
+    onClickCategory: (CategoryDomain) -> Unit
+) {
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -35,13 +37,14 @@ fun ItemCard(item: CategoryDomain, navController: NavController, vm: HomeScreenV
             .background(
                 color = Purple80,
                 shape = RoundedCornerShape(15.dp)
-            ).clickable(onClick = {
-                vm.setCurrentCategory(item)
+            )
+            .clickable(onClick = {
+                onClickCategory(item)
             }),
     ) {
         Column(modifier = Modifier.align(Alignment.CenterStart)) {
             Text(
-                text = count.value.toString() + " habits",
+                text = stringResource(id = R.string.Count_habits, count),
                 modifier = Modifier.padding(
                     start = 10.dp
                 )

@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 abstract class BaseViewModel<Event : UiEvent, State : UiState>(
     private val reducer: Reducer<State, Event>,
     private val useCase: List<UseCase<State, Event>>,
-    private val appNavigator: Navigator
+    protected val appNavigator: Navigator
 ) : ViewModel() {
 
     private val initialState: State by lazy {

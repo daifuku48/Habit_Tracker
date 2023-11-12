@@ -18,6 +18,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,30 +46,24 @@ import kotlinx.coroutines.launch
 @ExperimentalMaterial3Api
 @Composable
 fun HomeScreen(
-    navController: NavController, vm: HomeScreenViewModel
+    navController: NavController, viewModel: HomeScreenViewModel
 ) {
+    val state by viewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    var isLoadingCategories by remember {
-        mutableStateOf(true)
-    }
-
-    var isLoadingHabits by remember {
-        mutableStateOf(true)
-    }
 
     LaunchedEffect(key1 = SHIMMER_ITEMS) {
         delay(2000L)
-        isLoadingCategories = false
+        viewModel.categoriesIsLoaded()
         delay(1000L)
-        isLoadingHabits = false
+        viewModel.habitIsLoaded()
     }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             Column {
-                DrawerHeader(drawerState = drawerState, vm = vm)
+                DrawerHeader(drawerState = drawerState, completedPercent = state.completedPercentHabits)
                 DrawerBody(
                     listItem = listOf(
                         MenuItem(0, stringResource(R.string.home), Icons.Default.Home),
@@ -97,6 +92,7 @@ fun HomeScreen(
                     navigationIcon = {
                         IconButton(onClick = {
                             coroutineScope.launch {
+                                viewModel.getCompetedPercentHabits()
                                 drawerState.open()
                             }
                         }) {
@@ -128,14 +124,24 @@ fun HomeScreen(
                         .padding(paddingValues)
                 ) {
                     CategoriesText()
-                    ShimmerCategoryItemList(isLoading = isLoadingCategories,
+                    ShimmerCategoryItemList(isLoading = state.isLoadingCategories,
                         contentAfterLoading = {
-                            CategoriesItemsList(vm = vm, navController = navController)
+                            CategoriesItemsList(
+                                categoryList = state.categoriesList,
+                                onClickCategory = {viewModel.setCurrentCategory(it)},
+                                onClickAddCategory = {viewModel.navigateToAddHabit()},
+                                onClickAll = {viewModel.handleGetAllHabits()}
+                            )
                         })
                     HabitText()
-                    ShimmerHabitList(isLoading = isLoadingHabits,
+                    ShimmerHabitList(isLoading = state.isLoadingHabits,
                         contentAfterLoading = {
-                            HabitsList(vm = vm, navController = navController)
+                            HabitsList(
+                                habitList = state.habitList,
+                                isAllCategory = state.isAllCategory,
+                                navigateToAddHabit = {viewModel.navigateToAddHabit()},
+                                onClickSave = {viewModel.}
+                            )
                         }
                     )
                 }

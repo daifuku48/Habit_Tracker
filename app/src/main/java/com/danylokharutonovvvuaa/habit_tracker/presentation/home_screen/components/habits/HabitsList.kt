@@ -14,21 +14,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.danylokharutonovvvuaa.habit_tracker.domain.model.HabitDomain
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
+import kotlinx.collections.immutable.PersistentList
 
 
 @Composable
 fun HabitsList(
-    vm: HomeScreenViewModel,
-    navController: NavController
+    habitList: PersistentList<HabitDomain>,
+    isAllCategory: Boolean,
+    navigateToAddHabit: () -> Unit,
+    onClickSave: () -> Unit,
+    updateHabit: (HabitDomain) -> Unit
 ){
-    val listIsEmpty by remember {
-        mutableStateOf(true)
-    }
     LazyColumn(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)){
-        if (vm.habits.value.isEmpty()){
+        if (habitList.isEmpty()){
             item{
                 Box(
                     contentAlignment = Alignment.Center
@@ -36,28 +38,33 @@ fun HabitsList(
                     Text(text = "Habit`s is not exist")
                 }
             }
-            if (!vm.isAllCategory.value)
+            if (!isAllCategory)
             {
                 item{
-                    HabitAddCard(vm = vm, navController = navController)
+                    HabitAddCard(
+                        navigateToAddHabit = {navigateToAddHabit()},
+                        onClickSave = {onClickSave()}
+                    )
                 }
             }
 
         } else
         {
-            items(vm.habits.value.size){index ->
-                val habit = vm.habits.value[index]
+            items(habitList.size){index ->
+                val habit = habitList[index]
                 key(habit.id) {
-                    HabitCard(habit, vm)
+                    HabitCard(habit = habit, updateHabit = {updateHabit(it)})
                 }
             }
-            if (!vm.isAllCategory.value)
+            if (!isAllCategory)
             {
                 item{
-                    HabitAddCard(vm = vm, navController = navController)
+                    HabitAddCard(
+                        navigateToAddHabit = {navigateToAddHabit()},
+                        onClickSave = {onClickSave()}
+                    )
                 }
             }
         }
-
     }
 }

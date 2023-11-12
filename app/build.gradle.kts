@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.danylokharutonovvvuaa.habit_tracker"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.danylokharutonovvvuaa.habit_tracker"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -70,13 +70,11 @@ dependencies {
 
     // Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:2.8.1")
-    // optional - Test helpers
-    androidTestImplementation("androidx.work:work-testing:2.8.1")
     // optional - Multiprocess support
     implementation("androidx.work:work-multiprocess:2.8.1")
 
     //Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
+    implementation("com.google.dagger:hilt-android:2.48")
     implementation("androidx.hilt:hilt-work:1.1.0")
     kapt("androidx.hilt:hilt-compiler:1.1.0")
 
@@ -94,7 +92,7 @@ dependencies {
     //Room
     implementation("androidx.room:room-runtime:2.6.0")
     annotationProcessor("androidx.room:room-compiler:2.6.0")
-    ksp("androidx.room:room-compiler:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
 
     implementation("androidx.core:core-ktx:1.12.0")

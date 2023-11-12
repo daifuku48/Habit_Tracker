@@ -21,7 +21,7 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple
 
 @Composable
 fun ItemCardForAllHabits(
-    navController: NavController, vm: HomeScreenViewModel
+    onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -36,7 +36,7 @@ fun ItemCardForAllHabits(
                 color = Color.White,
                 shape = RoundedCornerShape(15.dp)
             ).clickable(onClick = {
-                vm.handleGetAllHabits()
+                onClick()
             })
     ) {
         Text(

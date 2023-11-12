@@ -25,7 +25,7 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple80
 
 @Composable
 fun ItemCardForAddCategory(
-    navController: NavController, vm: HomeScreenViewModel
+    onClick: () -> Unit
 ){
     Box(
         modifier = Modifier
@@ -40,12 +40,12 @@ fun ItemCardForAddCategory(
                 color = androidx.compose.ui.graphics.Color.White,
                 shape = RoundedCornerShape(15.dp)
             ).clickable(onClick = {
-                navController.navigate("add_category")
+                onClick()
             })
     ){
         Image(
             painter = painterResource(id = R.drawable.baseline_add_category),
-            contentDescription = "add category",
+            contentDescription = null,
             modifier = Modifier
                 .align(Alignment.Center)
                 .size(60.dp)

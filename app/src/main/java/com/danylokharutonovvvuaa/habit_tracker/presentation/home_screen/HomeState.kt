@@ -12,5 +12,6 @@ data class HomeState(
     val isLoadingHabits: Boolean = true,
     val isLoadingCategories: Boolean = true,
     val currentCategory: CategoryDomain? = null,
-    val completedPercentHabits: Float = 0.0f
+    val completedPercentHabits: Float = 0.0f,
+    val isAllCategory: Boolean = true
 ) : UiState

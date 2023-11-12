@@ -6,36 +6,43 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeScreenViewModel
+import com.danylokharutonovvvuaa.habit_tracker.domain.model.CategoryDomain
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.ItemCardForAddCategory
 import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.components.habits.ItemCardForAllHabits
+import kotlinx.collections.immutable.PersistentList
 
 @Composable
 fun CategoriesItemsList(
-    navController: NavController, vm: HomeScreenViewModel
-){
+    categoryList: PersistentList<CategoryDomain>,
+    onClickCategory: (CategoryDomain) -> Unit,
+    onClickAddCategory: () -> Unit,
+    onClickAll: () -> Unit
+) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(
             start = 12.dp
         )
-    ){
-        item{
+    ) {
+        item {
             ItemCardForAllHabits(
-                navController = navController,
-                vm = vm
+                onClick = {
+                    onClickAll()
+                }
             )
         }
 
-        items(vm.categories.value.size){index ->
-            ItemCard(vm.categories.value[index], navController, vm)
+        items(categoryList.size) { index ->
+            ItemCard(item = categoryList[index],
+                count = 2,
+                onClickCategory = {
+                    onClickCategory(categoryList[index])
+                })
         }
 
         item {
             ItemCardForAddCategory(
-                navController = navController,
-                vm = vm
+                onClick = { onClickAddCategory() }
             )
         }
     }

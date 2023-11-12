@@ -28,8 +28,10 @@ import com.danylokharutonovvvuaa.habit_tracker.presentation.ui.theme.Purple40
 
 
 @Composable
-fun HabitAddCard(vm: HomeScreenViewModel, navController: NavController){
-
+fun HabitAddCard(
+    navigateToAddHabit:() -> Unit,
+    onClickSave: () -> Unit
+){
     Box(modifier = Modifier
         .fillMaxWidth()
         .height(50.dp)
@@ -43,8 +45,8 @@ fun HabitAddCard(vm: HomeScreenViewModel, navController: NavController){
             shape = RoundedCornerShape(15.dp)
         )
         .clickable {
-            vm.saveCategoryId()
-            navController.navigate("add_habit")
+            onClickSave()
+            navigateToAddHabit()
         })
     {
         Text(

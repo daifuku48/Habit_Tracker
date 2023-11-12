@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danylokharutonovvvuaa.habit_tracker.domain.model.CategoryDomain
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.AddCategoryUseCase
+import com.danylokharutonovvvuaa.habit_tracker.presentation.base.navigation.Navigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddCategoryViewModel @Inject constructor(
     private val addCategoryUseCase: AddCategoryUseCase,
-    private val savedStateHandle: SavedStateHandle
+    private val appNavigator: Navigator
 ) : ViewModel() {
     val category: MutableState<CategoryDomain?> = mutableStateOf(null)
 
