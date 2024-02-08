@@ -24,7 +24,7 @@ fun HabitsList(
     habitList: PersistentList<HabitDomain>,
     isAllCategory: Boolean,
     navigateToAddHabit: () -> Unit,
-    onClickSave: () -> Unit,
+    addHabit: () -> Unit,
     updateHabit: (HabitDomain) -> Unit
 ){
     LazyColumn(
@@ -43,7 +43,7 @@ fun HabitsList(
                 item{
                     HabitAddCard(
                         navigateToAddHabit = {navigateToAddHabit()},
-                        onClickSave = {onClickSave()}
+                        onClickSave = {addHabit()}
                     )
                 }
             }
@@ -61,7 +61,7 @@ fun HabitsList(
                 item{
                     HabitAddCard(
                         navigateToAddHabit = {navigateToAddHabit()},
-                        onClickSave = {onClickSave()}
+                        onClickSave = {addHabit()}
                     )
                 }
             }

@@ -41,6 +41,18 @@ class HomeScreenViewModel @Inject constructor(
         appNavigator.navigateTo(Screen.AddHabit.route)
     }
 
+    fun navigateToSettingsScreen(){
+        appNavigator.navigateTo(Screen.SettingsScreen.route)
+    }
+
+    fun navigateToAnalyticsScreen(){
+        appNavigator.navigateTo(Screen.AnalyticsScreen.route)
+    }
+
+    fun navigateToHomeScreen() {
+        appNavigator.navigateTo(Screen.HomeScreen.route)
+    }
+
     fun habitIsLoaded(){
         handleEvent(HomeEvent.HabitsIsLoadedEvent)
     }
@@ -49,6 +61,9 @@ class HomeScreenViewModel @Inject constructor(
         handleEvent(HomeEvent.CategoriesIsLoadedEvent)
     }
 
+    fun addHabit() {
+        navigateToAddHabit()
+    }
     private fun getHabitsByCategory(){
         handleEvent(HomeEvent.GetAllHabitsByCategoryEvent)
     }

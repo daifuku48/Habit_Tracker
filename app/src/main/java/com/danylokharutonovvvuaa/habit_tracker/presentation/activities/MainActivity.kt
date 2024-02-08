@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                             navController.getBackStackEntry(Screen.HomeScreen.route)
                         }
                         val homeVM = hiltViewModel<HomeScreenViewModel>(entry)
-                        HomeScreen(navController = navController, viewModel = homeVM)
+                        HomeScreen(viewModel = homeVM)
                     }
 
                     composable(route = Screen.AddCategory.route) {
@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
                             navController.getBackStackEntry(Screen.AnalyticsScreen.route)
                         }
                         val analyticsVM = hiltViewModel<AnalyticsScreenViewModel>(entry)
-                        AnalyticsScreen(navController = navController, vm = analyticsVM)
+                        AnalyticsScreen(vm = analyticsVM)
                     }
 
                     composable(route = Screen.SettingsScreen.route) {
@@ -87,7 +87,7 @@ class MainActivity : ComponentActivity() {
                             navController.getBackStackEntry(Screen.SettingsScreen.route)
                         }
                         val settingsVM = hiltViewModel<SettingsScreenViewModel>(entry)
-                        SettingsScreen(navController = navController, vm = settingsVM)
+                        SettingsScreen(vm = settingsVM)
                     }
                 }
             }

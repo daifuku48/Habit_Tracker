@@ -8,6 +8,9 @@ import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.GetA
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.GetCompletedHabitsUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.GetHabitsByCategoryUseCase
 import com.danylokharutonovvvuaa.habit_tracker.domain.use_cases.home_screen.UpdateHabitIsFinishedToday
+import com.danylokharutonovvvuaa.habit_tracker.presentation.base.UseCase
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeEvent
+import com.danylokharutonovvvuaa.habit_tracker.presentation.home_screen.HomeState
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,14 +24,14 @@ object DomainModule {
 
     @Provides
     @Singleton
-    fun provideGetAllHabitsUseCase(repository: HabitsRepository): GetAllHabitsUseCase {
+    fun provideGetAllHabitsUseCase(repository: HabitsRepository): UseCase<HomeState, HomeEvent> {
         return GetAllHabitsUseCase(repository = repository)
     }
 
 
     @Provides
     @Singleton
-    fun provideGetAllCategoriesUseCase(repository: HabitsRepository) : GetAllCategoriesUseCase {
+    fun provideGetAllCategoriesUseCase(repository: HabitsRepository) : UseCase<HomeState, HomeEvent> {
         return GetAllCategoriesUseCase(repository = repository)
     }
 
@@ -47,20 +50,19 @@ object DomainModule {
 
     @Provides
     @Singleton
-    fun providesGetHabitsByCategoryUseCase(repository: HabitsRepository) : GetHabitsByCategoryUseCase {
+    fun providesGetHabitsByCategoryUseCase(repository: HabitsRepository) : UseCase<HomeState, HomeEvent> {
         return GetHabitsByCategoryUseCase(repository = repository)
     }
 
     @Provides
     @Singleton
-    fun providesUpdateHabitIsFinishedToday(repository: HabitsRepository) : UpdateHabitIsFinishedToday {
+    fun providesUpdateHabitIsFinishedToday(repository: HabitsRepository) : UseCase<HomeState, HomeEvent> {
         return UpdateHabitIsFinishedToday(repository = repository)
     }
 
-
     @Provides
     @Singleton
-    fun providesGetCompletedHabitsUseCase(repository: HabitsRepository) : GetCompletedHabitsUseCase {
+    fun providesGetCompletedHabitsUseCase(repository: HabitsRepository) : UseCase<HomeState, HomeEvent> {
         return GetCompletedHabitsUseCase(repository = repository)
     }
 }

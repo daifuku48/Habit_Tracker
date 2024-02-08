@@ -46,7 +46,7 @@ import kotlinx.coroutines.launch
 @ExperimentalMaterial3Api
 @Composable
 fun HomeScreen(
-    navController: NavController, viewModel: HomeScreenViewModel
+    viewModel: HomeScreenViewModel
 ) {
     val state by viewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
@@ -63,7 +63,10 @@ fun HomeScreen(
         drawerState = drawerState,
         drawerContent = {
             Column {
-                DrawerHeader(drawerState = drawerState, completedPercent = state.completedPercentHabits)
+                DrawerHeader(
+                    drawerState = drawerState,
+                    completedPercent = state.completedPercentHabits
+                )
                 DrawerBody(
                     listItem = listOf(
                         MenuItem(0, stringResource(R.string.home), Icons.Default.Home),
@@ -73,9 +76,9 @@ fun HomeScreen(
                     scope = coroutineScope,
                     onItemClick = {
                         when (it.id) {
-                            0 -> navController.navigate(Screen.HomeScreen.route)
-                            1 -> navController.navigate(Screen.AnalyticsScreen.route)
-                            2 -> navController.navigate(Screen.SettingsScreen.route)
+                            0 -> viewModel.navigateToHomeScreen()
+                            1 -> viewModel.navigateToAnalyticsScreen()
+                            2 -> viewModel.navigateToSettingsScreen()
                         }
                     }
                 )
@@ -128,9 +131,9 @@ fun HomeScreen(
                         contentAfterLoading = {
                             CategoriesItemsList(
                                 categoryList = state.categoriesList,
-                                onClickCategory = {viewModel.setCurrentCategory(it)},
-                                onClickAddCategory = {viewModel.navigateToAddHabit()},
-                                onClickAll = {viewModel.handleGetAllHabits()}
+                                onClickCategory = { viewModel.setCurrentCategory(it) },
+                                onClickAddCategory = { viewModel.navigateToAddCategory() },
+                                onClickAll = { viewModel.handleGetAllHabits() }
                             )
                         })
                     HabitText()
@@ -139,8 +142,9 @@ fun HomeScreen(
                             HabitsList(
                                 habitList = state.habitList,
                                 isAllCategory = state.isAllCategory,
-                                navigateToAddHabit = {viewModel.navigateToAddHabit()},
-                                onClickSave = {viewModel.}
+                                navigateToAddHabit = { viewModel.navigateToAddHabit() },
+                                addHabit = { viewModel.addHabit() },
+                                updateHabit = {viewModel.updateHabit(habit = it)}
                             )
                         }
                     )
